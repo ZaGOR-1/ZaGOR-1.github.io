@@ -7,7 +7,7 @@ body {
     text-align: center;
     
     /* Фоновий градієнт + паралакс */
-    background: linear-gradient(45deg, #ff7e5f, #feb47b);
+    background: linear-gradient(45deg, #59861edc, #c6df37);
     background-attachment: fixed;
     background-size: cover;
     
