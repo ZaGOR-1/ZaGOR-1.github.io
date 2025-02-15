@@ -6,10 +6,10 @@ body {
     color: #fff;
     text-align: center;
     
-    /* Фоновий градієнт + паралакс */
-    background: linear-gradient(45deg, #59861edc, #c6df37);
-    background-attachment: fixed;
-    background-size: cover;
+    background-image: url('background.jpg'); /* Замініть на URL вашого зображення */
+    background-size: cover; /* Робить фон масштабованим */
+    background-repeat: no-repeat; /* Запобігає повторенню зображення */
+    background-position: center; /* Центрує зображення */
     
     /* Плавна поява сторінки */
     animation: fadeIn 0.5s ease-in-out;
