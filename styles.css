@@ -6,7 +6,7 @@ body {
     color: #fff;
     text-align: center;
     
-    background-image: url('background.jpg'); /* Замініть на URL вашого зображення */
+    background-image: url('background.jpg');
     background-size: cover; /* Робить фон масштабованим */
     background-repeat: no-repeat; /* Запобігає повторенню зображення */
     background-position: center; /* Центрує зображення */
