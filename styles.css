@@ -1,0 +1,80 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    background: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+/* Зелена кнопка "Головна" */
+nav ul li a.home-button {
+    background: green;
+}
+
+nav ul li a.home-button:hover {
+    background: darkgreen;
+}
+
+.telegram-button {
+    background: #0088cc;
+}
+
+.telegram-button:hover {
+    background: #006699;
+}
+
+main {
+    padding: 20px;
+    text-align: center;
+}
+
+.youtube-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: red;
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.youtube-button:hover {
+    background: darkred;
+}
+
+footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
