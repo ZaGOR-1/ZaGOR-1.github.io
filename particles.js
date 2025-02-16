@@ -37,7 +37,7 @@ class Particle {
         this.size = Math.random() * 4 + 1;
         this.speedX = (Math.random() - 0.5) * 2;
         this.speedY = (Math.random() - 0.5) * 2;
-        this.opacity = Math.random() * 0.5 + 0.3;
+        this.opacity = Math.random() * 0.1 + 0.3;
     }
     update() {
         this.x += this.speedX;
