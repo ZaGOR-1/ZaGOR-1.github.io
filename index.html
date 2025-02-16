@@ -3,36 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мій сайт</title>
+    <meta name="description" content="ZaGOR website - особистий сайт з корисними матеріалами">
+    <meta name="keywords" content="ZaGOR, Telegram, YouTube, особистий сайт">
+    <meta name="author" content="ZaGOR">
+    <title>ZaGOR website</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <header>
-        <h1>Вітаю на моєму сайті</h1>
-        <nav>
-            <ul>
-                <li><a href="#" class="home-button"><i class="fas fa-home"></i> Головна</a></li>
-                <li><a href="https://t.me/ZaGOR_AM" target="_blank" class="telegram-button">
-                    <i class="fab fa-telegram"></i> Telegram
-                </a></li>
-            </ul>
-        </nav>
-    </header>
+    <div class="wrapper">
+        <header>
+            <h1>Вітаю на моєму сайті</h1>
+            <nav>
+                <ul>
+                    <li><a href="#" class="home-button"><i class="fas fa-home"></i> Головна</a></li>
+                    <li><a href="https://t.me/ZaGOR_AM" target="_blank" class="telegram-button"><i class="fab fa-telegram"></i> Telegram</a></li>
+                </ul>
+            </nav>
+        </header>
 
-    <main>
-        <section>
-            <h2>Про сайт</h2>
-            <p>Це сучасний сайт із плавною анімацією, градієнтом і ефектом скла.</p>
-            <a href="https://www.youtube.com/@zagor315" class="youtube-button" target="_blank">
-                <i class="fab fa-youtube"></i> Мій YouTube
-            </a>
-        </section>
-    </main>
-
+        <main>
+            <section>
+                <h2>Мої ресурси</h2>
+                <p>Тут ви знайдете корисні посилання та інформацію.</p>
+                <a href="https://www.youtube.com/@zagor315" class="youtube-button" target="_blank">
+                    <i class="fab fa-youtube"></i> Мій YouTube
+                </a>
+                
+                <button class="my-button" onclick="window.location.href='newpage.html'">Перейти</button>
+                <button class="toggle-bg-button" onclick="toggleBackground()">Змінити фон</button>
+            </section>
+        </main>
+    </div>
+    
     <footer>
         <p>© 2025 Всі права захищені</p>
     </footer>
+    
+    <button onclick="scrollToTop()" class="scroll-to-top">⬆</button>
+    
     <script src="particles.js"></script>
+    <script>
+        function toggleBackground() {
+            let isDark = document.body.classList.toggle("dark-mode");
+            localStorage.setItem("darkMode", isDark);
+        }
+        
+        window.onload = function() {
+            let isDark = localStorage.getItem("darkMode") === "true";
+            document.body.classList.toggle("dark-mode", isDark);
+        };
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+        
+        window.onscroll = function() {
+            document.querySelector(".scroll-to-top").classList.toggle("show", window.scrollY > 300);
+        };
+    </script>
+    
+    <style>
+        body {
+            transition: background-color 0.5s ease, color 0.5s ease;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .wrapper {
+            flex-grow: 1;
+        }
+        .dark-mode {
+            background-color: black;
+            color: white;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+        nav a {
+            text-decoration: none;
+            color: white;
+            padding: 10px 15px;
+            background: #007bff;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        nav a:hover {
+            background: #0056b3;
+        }
+        .my-button, .toggle-bg-button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+            transition: 0.3s;
+            position: fixed;
+            z-index: 1000;
+        }
+        .my-button:hover, .toggle-bg-button:hover {
+            background-color: #0056b3;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+            transform: scale(1.05);
+        }
+        .toggle-bg-button {
+            top: 20px;
+            left: 20px;
+            right: auto;
+        }
+        .my-button {
+            top: 20px;
+            right: 20px;
+            left: auto;
+        }
+        .scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #007bff;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: none;
+        }
+        .scroll-to-top.show {
+            display: block;
+        }
+        footer {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            text-align: center;
+            width: 100%;
+        }
+    </style>
 </body>
 </html>
