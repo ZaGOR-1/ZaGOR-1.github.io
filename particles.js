@@ -10,31 +10,39 @@ canvas.height = window.innerHeight;
 const ctx = canvas.getContext("2d");
 const particles = [];
 const mouse = { x: null, y: null };
+const MAX_PARTICLES = 300; // Ліміт частинок
 
 window.addEventListener("resize", () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    requestAnimationFrame(() => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
 });
 
 window.addEventListener("mousemove", (event) => {
     mouse.x = event.x;
     mouse.y = event.y;
-    particles.push(new Particle(mouse.x, mouse.y));
+    for (let i = 0; i < 3; i++) { // Додаємо кілька частинок для ефекту
+        particles.push(new Particle(mouse.x, mouse.y));
+    }
+    if (particles.length > MAX_PARTICLES) {
+        particles.splice(0, particles.length - MAX_PARTICLES);
+    }
 });
 
 class Particle {
     constructor(x, y) {
         this.x = x;
         this.y = y;
-        this.size = Math.random() * 5 + 1;
-        this.speedX = Math.random() * 3 - 1.5;
-        this.speedY = Math.random() * 3 - 1.5;
-        this.opacity = 0.3; // Змінено непрозорість
+        this.size = Math.random() * 4 + 1;
+        this.speedX = (Math.random() - 0.5) * 2;
+        this.speedY = (Math.random() - 0.5) * 2;
+        this.opacity = Math.random() * 0.5 + 0.3;
     }
     update() {
         this.x += this.speedX;
         this.y += this.speedY;
-        this.opacity -= 0.01;
+        this.opacity -= 0.005; // Більш плавне зникнення
     }
     draw() {
         ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
@@ -46,13 +54,9 @@ class Particle {
 
 function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach((particle, index) => {
-        particle.update();
-        particle.draw();
-        if (particle.opacity <= 0) {
-            particles.splice(index, 1);
-        }
-    });
+    particles.forEach(p => p.update());
+    particles.forEach(p => p.draw());
+    particles.filter(p => p.opacity > 0); // Оптимізоване видалення частинок
     requestAnimationFrame(animate);
 }
 
