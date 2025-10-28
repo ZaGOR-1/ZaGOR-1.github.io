@@ -26,6 +26,9 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: Create .env.production file
+        run: echo "${{ secrets.ENV_PRODUCTION }}" > .env.production
+
       - name: Extract metadata
         id: meta
         uses: docker/metadata-action@v5
