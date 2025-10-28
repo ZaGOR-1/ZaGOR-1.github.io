@@ -2,7 +2,9 @@ name: CD - Deploy to Production
 
 on:
   push:
-    branches: [ main ]
+    # ИСПРАВЛЕНО: Добавлена ветка 'develop',
+    # иначе ваш 'deploy-staging' никогда не запустится
+    branches: [ main, develop ]
     tags:
       - 'v*'
 
@@ -28,7 +30,9 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ secrets.DOCKER_USERNAME }}/finance-tracker
+          # ИСПРАВЛЕНО: Была опечатка DOCKER_USERNAME
+          # Должно быть DOCKERHUB_USERNAME, как в шаге Login
+          images: ${{ secrets.DOCKERHUB_USERNAME }}/finance-tracker
           tags: |
             type=ref,event=branch
             type=semver,pattern={{version}}
@@ -49,6 +53,8 @@ jobs:
     name: Deploy to Staging
     runs-on: ubuntu-latest
     needs: build-and-push
+    # Это условие теперь будет работать,
+    # т.к. мы добавили 'develop' в триггер 'on:'
     if: github.ref == 'refs/heads/develop'
     environment:
       name: staging
@@ -88,6 +94,10 @@ jobs:
 
       - name: Deploy to production server
         uses: appleboy/ssh-action@v1.0.0
+        # ИСПРАВЛЕНО: Добавлен env для $DB_PASSWORD,
+        # иначе скрипт бэкапа упадет с ошибкой
+        env:
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
         with:
           host: ${{ secrets.PRODUCTION_HOST }}
           username: ${{ secrets.PRODUCTION_USER }}
@@ -96,6 +106,7 @@ jobs:
             cd /var/www/finance-tracker
             
             # Backup database
+            # Переменная $DB_PASSWORD теперь доступна из env
             docker-compose exec -T db mysqldump -u root -p$DB_PASSWORD finance_tracker > backup_$(date +%Y%m%d_%H%M%S).sql
             
             # Pull new images
