@@ -6,7 +6,6 @@ export const translations = {
       skills: 'Навички',
       education: 'Освіта',
       experience: 'Досвід',
-      projects: 'Проекти',
       contact: 'Контакти',
       downloadCV: 'Завантажити резюме',
     },
@@ -116,10 +115,6 @@ export const translations = {
         },
       ],
     },
-    projects: {
-      title: 'Проекти',
-      subtitle: 'Мої останні роботи',
-    },
     contact: {
       title: 'Контакти',
       subtitle: "Зв'яжіться зі мною",
@@ -155,7 +150,6 @@ export const translations = {
       skills: 'Skills',
       education: 'Education',
       experience: 'Experience',
-      projects: 'Projects',
       contact: 'Contact',
       downloadCV: 'Download CV',
     },
@@ -264,10 +258,6 @@ export const translations = {
           ],
         },
       ],
-    },
-    projects: {
-      title: 'Projects',
-      subtitle: 'My recent work',
     },
     contact: {
       title: 'Contact',

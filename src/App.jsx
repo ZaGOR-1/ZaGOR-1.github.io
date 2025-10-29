@@ -12,7 +12,6 @@ const About = lazy(() => import('./components/About'));
 const Skills = lazy(() => import('./components/Skills'));
 const Education = lazy(() => import('./components/Education'));
 const Experience = lazy(() => import('./components/Experience'));
-const Projects = lazy(() => import('./components/Projects'));
 const Contact = lazy(() => import('./components/Contact'));
 const Footer = lazy(() => import('./components/Footer'));
 
@@ -36,12 +35,7 @@ function App() {
         className="fixed top-0 left-0 right-0 h-2 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 
                    dark:from-blue-400 dark:via-purple-400 dark:to-pink-400
                    transform origin-left z-[60] shadow-[0_2px_10px_rgba(59,130,246,0.5)]"
-        style={{ 
-          scaleX: scrollProgress / 100,
-          WebkitBackfaceVisibility: 'hidden',
-          backfaceVisibility: 'hidden',
-          WebkitTransform: `scaleX(${scrollProgress / 100})`,
-        }}
+        style={{ scaleX: scrollProgress / 100 }}
         initial={{ scaleX: 0 }}
         transition={{ duration: 0.1, ease: 'easeOut' }}
       />
@@ -54,14 +48,13 @@ function App() {
         translations={translations}
       />
 
-      <main id="main">
+      <main>
         <Hero language={language} translations={translations} />
         <Suspense fallback={<LoadingSpinner />}>
           <About language={language} translations={translations} />
           <Skills language={language} translations={translations} />
           <Education language={language} translations={translations} />
           <Experience language={language} translations={translations} />
-          <Projects language={language} translations={translations} />
           <Contact language={language} translations={translations} />
           <Footer language={language} translations={translations} />
         </Suspense>
