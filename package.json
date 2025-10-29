@@ -9,7 +9,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "check": "node check-setup.js",
-    "generate-resume": "node generate-resume.cjs"
+    "generate-resume": "node generate-resume.cjs",
+    "update-sitemap": "node update-sitemap.js"
   },
   "repository": {
     "type": "git",
