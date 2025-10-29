@@ -35,7 +35,7 @@ html {
   html {
     scroll-behavior: auto;
   }
-  
+
   *,
   *::before,
   *::after {
@@ -68,7 +68,6 @@ body {
   border: 1px solid rgba(229, 231, 235, 0.8);
   backface-visibility: hidden;
 }
-
 
 .dark .glass-effect {
   background: rgba(45, 55, 72, 0.95);
@@ -189,20 +188,29 @@ body {
   white-space: normal;
 }
 
-/* --- Safari / Mobile Rendering Fix --- */
+/* --- 🧠 Safari / Mobile Rendering Fix --- */
 @supports (-webkit-touch-callout: none) {
-  /* Вимикаємо GPU-трансформації для мобільних */
+  /* Вимикаємо GPU-трансформації */
   .glass-effect {
     transform: none !important;
     will-change: auto !important;
   }
 
-  /* Фіксимо backdrop-filter, якщо він використовується */
+  /* Фіксимо backdrop-filter при масштабуванні */
   .glass-blur {
     -webkit-transform: translateZ(0);
+    transform: translateZ(0);
   }
 
-  /* Оптимізуємо скрол і масштабування */
+  /* Стабілізуємо рендеринг під час pinch-to-zoom */
+  body {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000;
+  }
+
+  /* Уникаємо зависань скролу */
   html, body {
     overscroll-behavior: none;
     -webkit-overflow-scrolling: touch;
