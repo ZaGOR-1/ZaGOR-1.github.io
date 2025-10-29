@@ -66,10 +66,9 @@ body {
 .glass-effect {
   background: rgba(255, 255, 255, 0.95);
   border: 1px solid rgba(229, 231, 235, 0.8);
-  will-change: transform;
-  transform: translateZ(0);
   backface-visibility: hidden;
 }
+
 
 .dark .glass-effect {
   background: rgba(45, 55, 72, 0.95);
@@ -188,4 +187,24 @@ body {
   overflow: visible;
   clip: auto;
   white-space: normal;
+}
+
+/* --- Safari / Mobile Rendering Fix --- */
+@supports (-webkit-touch-callout: none) {
+  /* Вимикаємо GPU-трансформації для мобільних */
+  .glass-effect {
+    transform: none !important;
+    will-change: auto !important;
+  }
+
+  /* Фіксимо backdrop-filter, якщо він використовується */
+  .glass-blur {
+    -webkit-transform: translateZ(0);
+  }
+
+  /* Оптимізуємо скрол і масштабування */
+  html, body {
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: touch;
+  }
 }
