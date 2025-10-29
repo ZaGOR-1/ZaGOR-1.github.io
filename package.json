@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ZaGOR-1/testcto.git"
+    "url": "git+https://github.com/ZaGOR-1/ZaGOR-1.github.io.git"
   },
   "keywords": [
     "portfolio",
@@ -24,9 +24,9 @@
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ZaGOR-1/testcto/issues"
+    "url": "https://github.com/ZaGOR-1/ZaGOR-1.github.io/issues"
   },
-  "homepage": "https://github.com/ZaGOR-1/testcto#readme",
+  "homepage": "https://zagor.me/",
   "dependencies": {
     "@vitejs/plugin-react": "^5.1.0",
     "framer-motion": "^12.23.24",

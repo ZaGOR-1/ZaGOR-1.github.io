@@ -143,19 +143,75 @@ Create `netlify.toml` in root directory:
 
 ## 📘 GitHub Pages
 
-GitHub Pages is free hosting directly from your GitHub repository.
+GitHub Pages is free hosting directly from your GitHub repository. This project is configured to automatically deploy to GitHub Pages using GitHub Actions.
 
-### Setup
+### Automatic Deployment Setup (Already Configured)
+
+This repository is already configured for automatic deployment! Every push to the `main` branch will automatically deploy to GitHub Pages.
+
+**What's already set up:**
+- ✅ Vite base URL configured in `vite.config.js`
+- ✅ GitHub Actions workflow in `.github/workflows/deploy.yml`
+- ✅ Homepage URL in `package.json`
+- ✅ `.nojekyll` file to prevent Jekyll processing
+
+### Enable GitHub Pages (One-Time Setup)
+
+1. **Go to Repository Settings**
+   - Navigate to your repository on GitHub
+   - Click on "Settings" tab
+   - Click on "Pages" in the left sidebar
+
+2. **Configure GitHub Pages**
+   - Source: "GitHub Actions"
+   - Click "Save"
+
+3. **Push to Main Branch**
+   ```bash
+   git add .
+   git commit -m "Enable GitHub Pages deployment"
+   git push origin main
+   ```
+
+4. **Wait for Deployment**
+   - Go to the "Actions" tab in your repository
+   - Watch the deployment workflow run
+   - Once complete (2-3 minutes), your site is live!
+
+5. **Visit Your Site**
+   - Your site will be available at: `https://zagor-1.github.io/` (GitHub Pages)
+   - Or at: `https://zagor.me/` (custom domain, after DNS configuration)
+
+### How It Works
+
+- Every push to `main` branch triggers the GitHub Actions workflow
+- The workflow builds your site using `npm run build`
+- Built files are automatically deployed to GitHub Pages
+- You can also trigger deployment manually from the Actions tab
+
+### Updating Your Site
+
+Just push your changes to the main branch:
+```bash
+git add .
+git commit -m "Update portfolio"
+git push origin main
+```
+
+The site will automatically rebuild and redeploy!
+
+### Alternative: Manual Deployment (Legacy Method)
+
+If you prefer manual control, you can also use the gh-pages package:
 
 1. **Install gh-pages**
 ```bash
 npm install --save-dev gh-pages
 ```
 
-2. **Update package.json**
+2. **Add deploy script to package.json**
 ```json
 {
-  "homepage": "https://yourusername.github.io/repository-name",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
@@ -163,33 +219,7 @@ npm install --save-dev gh-pages
 }
 ```
 
-3. **Update vite.config.js**
-```javascript
-export default defineConfig({
-  plugins: [react()],
-  base: '/repository-name/', // Replace with your repo name
-})
-```
-
-4. **Deploy**
-```bash
-npm run deploy
-```
-
-5. **Configure GitHub Pages**
-   - Go to repository Settings → Pages
-   - Source: Deploy from branch
-   - Branch: gh-pages
-   - Folder: / (root)
-   - Save
-
-6. **Wait & Visit**
-   - Wait 2-3 minutes for deployment
-   - Visit: `https://yourusername.github.io/repository-name`
-
-### Updating Your Site
-
-Every time you want to update:
+3. **Deploy manually**
 ```bash
 npm run deploy
 ```

@@ -26,8 +26,8 @@ A modern, responsive portfolio website built with React, Tailwind CSS, and Frame
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
-cd student-portfolio
+git clone https://github.com/ZaGOR-1/ZaGOR-1.github.io.git
+cd ZaGOR-1.github.io
 ```
 
 2. Install dependencies:
@@ -231,6 +231,33 @@ experience: {
 
 ## 🌐 Deployment
 
+### GitHub Pages (Automatic Deployment) ⭐
+
+This project is **already configured** for automatic deployment to GitHub Pages with custom domain support! 
+
+**Quick Setup:**
+
+1. Go to your repository settings on GitHub: https://github.com/ZaGOR-1/ZaGOR-1.github.io
+2. Navigate to Settings → Pages
+3. Under "Source", select **"GitHub Actions"**
+4. Push your changes to the `main` branch
+5. Your site will be live at:
+   - **Primary:** `https://zagor.me` (custom domain)
+   - **GitHub Pages:** `https://zagor-1.github.io`
+
+Every time you push to `main`, your site will automatically rebuild and redeploy!
+
+📖 **Detailed instructions:**
+- [GITHUB_PAGES_SETUP_UK.md](./GITHUB_PAGES_SETUP_UK.md) (in Ukrainian)
+- [CUSTOM_DOMAIN_SETUP.md](./CUSTOM_DOMAIN_SETUP.md) (in English - Custom Domain Guide)
+
+**What's already configured:**
+- ✅ GitHub Actions workflow (`.github/workflows/deploy.yml`)
+- ✅ Vite base URL configured for root domain (`/`)
+- ✅ `.nojekyll` file to prevent Jekyll processing
+- ✅ Homepage URL in package.json pointing to zagor.me
+- ✅ CNAME file for custom domain configuration
+
 ### Deploy to Vercel
 
 1. Install Vercel CLI:
@@ -260,28 +287,7 @@ npm run build
 netlify deploy --prod --dir=dist
 ```
 
-### Deploy to GitHub Pages
-
-1. Install gh-pages:
-```bash
-npm install -g gh-pages
-```
-
-2. Add to `package.json`:
-```json
-{
-  "homepage": "https://yourusername.github.io/portfolio",
-  "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
-  }
-}
-```
-
-3. Deploy:
-```bash
-npm run deploy
-```
+📖 **More deployment options:** See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed guides
 
 ## 🛠️ Technologies Used
 
