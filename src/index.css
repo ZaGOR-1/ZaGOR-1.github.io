@@ -29,8 +29,8 @@
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
-  /* Safari fix */
   -webkit-text-size-adjust: 100%;
+  height: 100%;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -59,24 +59,18 @@ body {
   overflow-x: hidden;
   width: 100%;
   text-rendering: optimizeLegibility;
-  /* Safari масштабування fix */
+  min-height: 100%;
   position: relative;
-  min-height: 100vh;
 }
 
 #root {
   min-height: 100vh;
-  /* Safari fix для масштабування */
-  position: relative;
-  isolation: isolate;
 }
 
+/* КРИТИЧНО: Спрощена glass-effect БЕЗ backdrop-filter */
 .glass-effect {
   background: rgba(255, 255, 255, 0.95);
   border: 1px solid rgba(229, 231, 235, 0.8);
-  /* Вимкнено для Safari стабільності */
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
 }
 
 .dark .glass-effect {
@@ -198,70 +192,43 @@ body {
   white-space: normal;
 }
 
-/* --- 🧠 Safari / Mobile Rendering Fix --- */
+/* Safari Mobile Fix - МАКСИМАЛЬНО СПРОЩЕНО */
 @supports (-webkit-touch-callout: none) {
-  /* Вимикаємо GPU-трансформації що викликають чорний екран */
-  * {
+  /* Вимикаємо ВСІ трансформації */
+  *, *::before, *::after {
     -webkit-transform: none !important;
     transform: none !important;
     -webkit-backface-visibility: visible !important;
     backface-visibility: visible !important;
-  }
-
-  /* Виключення для анімацій що потребують transform */
-  .needs-transform {
-    -webkit-transform: translateZ(0) !important;
-    transform: translateZ(0) !important;
-  }
-
-  body, html {
-    /* Вимикаємо 3D трансформації */
-    -webkit-transform: none !important;
-    transform: none !important;
+    will-change: auto !important;
     -webkit-perspective: none !important;
     perspective: none !important;
-    -webkit-backface-visibility: visible !important;
-    backface-visibility: visible !important;
   }
 
-  /* Фікс для glass-effect без GPU прискорення */
-  .glass-effect {
+  html, body {
     -webkit-transform: none !important;
     transform: none !important;
-    will-change: auto !important;
-  }
-
-  /* Стабільний скролінг */
-  html, body {
-    overscroll-behavior: none;
+    overscroll-behavior-y: none;
     -webkit-overflow-scrolling: touch;
+    height: 100%;
   }
 
-  /* Фікс для fixed/sticky елементів */
-  .fixed, .sticky, [style*="position: fixed"], [style*="position: sticky"] {
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    will-change: transform;
+  body {
+    position: relative;
+  }
+
+  #root {
+    position: relative;
   }
 }
 
-/* Додатковий фікс для iOS Safari */
-@supports (-webkit-appearance: none) and (not (overflow: -webkit-marquee)) {
-  body {
-    /* Запобігаємо чорному екрану при zoom */
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
+/* iOS Safari специфічний фікс */
+@supports (-webkit-appearance: none) {
+  html {
+    height: -webkit-fill-available;
   }
   
-  #root {
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    -webkit-font-smoothing: antialiased;
+  body {
+    min-height: -webkit-fill-available;
   }
-}
-
-/* Viewport meta альтернатива через CSS */
-@viewport {
-  width: device-width;
-  zoom: 1.0;
 }
