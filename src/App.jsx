@@ -12,6 +12,7 @@ const About = lazy(() => import('./components/About'));
 const Skills = lazy(() => import('./components/Skills'));
 const Education = lazy(() => import('./components/Education'));
 const Experience = lazy(() => import('./components/Experience'));
+const Projects = lazy(() => import('./components/Projects'));
 const Contact = lazy(() => import('./components/Contact'));
 const Footer = lazy(() => import('./components/Footer'));
 
@@ -48,13 +49,14 @@ function App() {
         translations={translations}
       />
 
-      <main>
+      <main id="main">
         <Hero language={language} translations={translations} />
         <Suspense fallback={<LoadingSpinner />}>
           <About language={language} translations={translations} />
           <Skills language={language} translations={translations} />
           <Education language={language} translations={translations} />
           <Experience language={language} translations={translations} />
+          <Projects language={language} translations={translations} />
           <Contact language={language} translations={translations} />
           <Footer language={language} translations={translations} />
         </Suspense>
