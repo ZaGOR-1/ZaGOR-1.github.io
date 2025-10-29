@@ -52,7 +52,7 @@ const Header = ({ language, setLanguage, darkMode, setDarkMode, translations }) 
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
         isScrolled
-          ? 'bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm shadow-md dark:border-b dark:border-gray-600'
+          ? 'bg-white/98 dark:bg-gray-800/98 shadow-md dark:border-b dark:border-gray-600'
           : 'bg-transparent'
       }`}
       role="banner"
