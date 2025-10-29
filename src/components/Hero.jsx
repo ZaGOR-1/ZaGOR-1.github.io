@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
-import { Download, Mail, Github, Linkedin, Send } from 'lucide-react';
+import { Download, Mail, Github, Linkedin, Send, Mail as MailIcon } from 'lucide-react';
 import { useScrollToSection } from '../hooks/useScrollProgress';
+import { SOCIAL_LINKS } from '../config/constants';
 
 const Hero = ({ language, translations }) => {
   const scrollToSection = useScrollToSection();
@@ -26,12 +27,20 @@ const Hero = ({ language, translations }) => {
     },
   };
 
-  const socialLinks = [
-    { icon: Github, url: 'https://github.com', label: 'GitHub' },
-    { icon: Linkedin, url: 'https://linkedin.com', label: 'LinkedIn' },
-    { icon: Send, url: 'https://t.me/', label: 'Telegram' },
-    { icon: Mail, url: 'mailto:denys.zahorovskyi@example.com', label: 'Email' },
-  ];
+  const getIconComponent = (iconName) => {
+    const icons = {
+      Github,
+      Linkedin,
+      Send,
+      Mail: MailIcon,
+    };
+    return icons[iconName] || MailIcon;
+  };
+
+  const socialLinks = SOCIAL_LINKS.map(link => ({
+    ...link,
+    IconComponent: getIconComponent(link.icon),
+  }));
 
   return (
     <section
@@ -111,9 +120,9 @@ const Hero = ({ language, translations }) => {
                   className="p-2.5 sm:p-3 rounded-full bg-gray-200 dark:bg-gray-600 hover:bg-blue-600 
                            dark:hover:bg-blue-600
                            hover:text-white text-gray-700 dark:text-gray-200 transition-colors duration-200"
-                  aria-label={social.label}
+                  aria-label={social.name}
                 >
-                  <social.icon size={20} className="sm:w-6 sm:h-6" />
+                  <social.IconComponent size={20} className="sm:w-6 sm:h-6" />
                 </a>
               ))}
             </motion.div>

@@ -34,7 +34,7 @@ export const translations = {
         },
         teamPlayer: {
           title: 'Командний гравець',
-          description: 'Добре працюю в команді та ціню співпрацю',
+          description: 'Добре працюю в команді та ціную співпрацю',
         },
         dedicated: {
           title: 'Відданий',
@@ -79,11 +79,9 @@ export const translations = {
         'React - Повний курс (Udemy)',
         'JavaScript алгоритми та структури даних (freeCodeCamp)',
         'Responsive Web Design (freeCodeCamp)',
-        'Introduction to C (Sololearn)',
-        'C Intermediate (Sololearn)',
-        'Introduction to SQL (Sololearn)',
-        'SQL Intermediate (Sololearn)',
-        'Introduction to C# (Sololearn)',
+        'C - Вступ та просунутий рівень (Sololearn)',
+        'SQL - Вступ та середній рівень (Sololearn)',
+        'C# - Вступ (Sololearn)',
       ],
     },
     experience: {
@@ -223,11 +221,9 @@ export const translations = {
         'React - The Complete Guide (Udemy)',
         'JavaScript Algorithms and Data Structures (freeCodeCamp)',
         'Responsive Web Design (freeCodeCamp)',
-        'Introduction to C (Sololearn)',
-        'C Intermediate (Sololearn)',
-        'Introduction to SQL (Sololearn)',
-        'SQL Intermediate (Sololearn)',
-        'Introduction to C# (Sololearn)',
+        'C - Introduction and Intermediate (Sololearn)',
+        'SQL - Introduction and Intermediate (Sololearn)',
+        'C# - Introduction (Sololearn)',
       ],
     },
     experience: {

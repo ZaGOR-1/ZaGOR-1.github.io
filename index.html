@@ -2,24 +2,25 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Portfolio of Denys Zahorovskyi - Full Stack Developer specializing in React, Node.js, PHP, C, and C#. 2nd year Software Engineering student at Zhytomyr Polytechnic." />
-    <meta name="keywords" content="Denys Zahorovskyi, Full Stack Developer, React Developer, Frontend Developer, Backend Developer, Portfolio, Web Developer, Software Engineer" />
+    <meta name="description" content="Denys Zahorovskyi - Full Stack Developer specializing in React, Node.js, PHP, C, and C#. 2nd year Software Engineering student at Zhytomyr Polytechnic." />
+    <meta name="keywords" content="Denys Zahorovskyi, Full Stack Developer, React Developer, Frontend Developer, Backend Developer, Portfolio, Web Developer, Software Engineer, Zhytomyr, Ukraine" />
     <meta name="author" content="Denys Zahorovskyi" />
     
     <!-- Open Graph Meta Tags -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Denys Zahorovskyi - Full Stack Developer Portfolio" />
     <meta property="og:description" content="2nd year Software Engineering student specializing in Full Stack Development. Check out my projects and skills!" />
-    <meta property="og:url" content="https://zahorovskyi.dev" />
-    <meta property="og:image" content="/images/profile.jpg" />
+    <meta property="og:url" content="https://zagor.me" />
+    <meta property="og:image" content="https://zagor.me/images/og-image.jpg" />
+    <meta property="og:site_name" content="Denys Zahorovskyi Portfolio" />
     
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Denys Zahorovskyi - Full Stack Developer" />
     <meta name="twitter:description" content="Full Stack Developer specializing in React, Node.js, PHP, C, and C#" />
-    <meta name="twitter:image" content="/images/profile.jpg" />
+    <meta name="twitter:image" content="https://zagor.me/images/og-image.jpg" />
     
     <!-- Theme Color -->
     <meta name="theme-color" content="#2563eb" />
@@ -27,11 +28,55 @@
     <!-- Manifest -->
     <link rel="manifest" href="/manifest.json" />
     
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    
     <title>Denys Zahorovskyi - Full Stack Developer Portfolio</title>
     
     <!-- Preconnect to improve performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Prevent FOUC (Flash of Unstyled Content) for dark mode -->
+    <script>
+      (function() {
+        try {
+          const darkMode = localStorage.getItem('darkMode');
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          
+          if (darkMode === 'true' || (darkMode === null && prefersDark)) {
+            document.documentElement.classList.add('dark');
+          }
+        } catch (e) {
+          console.error('Error loading theme:', e);
+        }
+      })();
+    </script>
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Denys Zahorovskyi",
+      "url": "https://zagor.me",
+      "jobTitle": "Full Stack Developer",
+      "worksFor": {
+        "@type": "EducationalOrganization",
+        "name": "Zhytomyr Polytechnic"
+      },
+      "description": "Full Stack Developer specializing in React, Node.js, PHP, C, and C#",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Zhytomyr",
+        "addressCountry": "Ukraine"
+      },
+      "sameAs": [
+        "https://github.com/ZaGOR-1",
+        "https://www.linkedin.com/in/denys-zahorovskyi"
+      ]
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>

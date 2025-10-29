@@ -1,14 +1,23 @@
 import { Heart, Github, Linkedin, Send, Mail } from 'lucide-react';
+import { SOCIAL_LINKS } from '../config/constants';
 
 const Footer = ({ language, translations }) => {
   const t = translations[language];
 
-  const socialLinks = [
-    { icon: Github, url: 'https://github.com', label: 'GitHub' },
-    { icon: Linkedin, url: 'https://linkedin.com', label: 'LinkedIn' },
-    { icon: Send, url: 'https://t.me/', label: 'Telegram' },
-    { icon: Mail, url: 'mailto:denys.zahorovskyi@example.com', label: 'Email' },
-  ];
+  const getIconComponent = (iconName) => {
+    const icons = {
+      Github,
+      Linkedin,
+      Send,
+      Mail,
+    };
+    return icons[iconName] || Mail;
+  };
+
+  const socialLinks = SOCIAL_LINKS.map(link => ({
+    ...link,
+    IconComponent: getIconComponent(link.icon),
+  }));
 
   return (
     <footer className="bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
@@ -18,8 +27,8 @@ const Footer = ({ language, translations }) => {
             <h3 className="text-xl sm:text-2xl font-bold gradient-text mb-3 sm:mb-4">Denys Zahorovskyi</h3>
             <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300">
               {language === 'en'
-                ? 'Frontend Developer passionate about creating beautiful and functional web applications.'
-                : 'Frontend Developer, який створює красиві та функціональні веб-додатки.'}
+                ? 'Full Stack Developer passionate about creating beautiful and functional web applications.'
+                : 'Full Stack Developer, який створює красиві та функціональні веб-додатки.'}
             </p>
           </div>
 
@@ -34,7 +43,13 @@ const Footer = ({ language, translations }) => {
                     onClick={() => {
                       const element = document.getElementById(section);
                       if (element) {
-                        element.scrollIntoView({ behavior: 'smooth' });
+                        const offset = section === 'home' ? 0 : 80;
+                        const elementPosition = element.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - offset;
+                        window.scrollTo({
+                          top: offsetPosition,
+                          behavior: 'smooth',
+                        });
                       }
                     }}
                     className="text-sm sm:text-base text-gray-600 dark:text-gray-300 hover:text-blue-500 
@@ -61,9 +76,9 @@ const Footer = ({ language, translations }) => {
                   className="p-2.5 sm:p-3 rounded-full bg-gray-200 dark:bg-gray-600 hover:bg-blue-600 
                            dark:hover:bg-blue-600
                            hover:text-white text-gray-700 dark:text-gray-200 transition-colors duration-200"
-                  aria-label={social.label}
+                  aria-label={social.name}
                 >
-                  <social.icon size={18} className="sm:w-5 sm:h-5" />
+                  <social.IconComponent size={18} className="sm:w-5 sm:h-5" />
                 </a>
               ))}
             </div>

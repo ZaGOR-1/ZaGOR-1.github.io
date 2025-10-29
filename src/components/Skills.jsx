@@ -1,6 +1,7 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { skillsData } from '../data/translations';
+import { ANIMATION_CONFIG } from '../config/constants';
 
 const Skills = ({ language, translations }) => {
   const ref = useRef(null);
@@ -12,7 +13,7 @@ const Skills = ({ language, translations }) => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: ANIMATION_CONFIG.staggerDelay,
       },
     },
   };
@@ -22,7 +23,7 @@ const Skills = ({ language, translations }) => {
     visible: {
       opacity: 1,
       transition: {
-        duration: 0.3,
+        duration: ANIMATION_CONFIG.itemDuration,
       },
     },
   };
@@ -52,37 +53,44 @@ const Skills = ({ language, translations }) => {
               </h3>
               
               <div className="space-y-4 sm:space-y-6">
-                {categoryData.skills.map((skill, skillIndex) => (
-                  <motion.div
-                    key={skillIndex}
-                    variants={itemVariants}
-                    className="space-y-2"
-                  >
-                    <div className="flex justify-between items-center">
-                      <span className="font-semibold text-gray-700 dark:text-gray-300 text-sm sm:text-base">
-                        {skill.name}
-                      </span>
-                      <span className="text-xs sm:text-sm text-gray-500 dark:text-gray-300">
-                        {skill.level}%
-                      </span>
-                    </div>
-                    
-                    <div className="w-full h-2.5 sm:h-3 bg-gray-200 dark:bg-gray-600 rounded-full overflow-hidden">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={isInView ? { width: `${skill.level}%` } : { width: 0 }}
-                        transition={{
-                          duration: 0.8,
-                          delay: categoryIndex * 0.1 + skillIndex * 0.05,
-                          ease: 'easeOut',
-                        }}
-                        style={{ willChange: 'width' }}
-                        className="h-full bg-blue-600 
-                                 dark:bg-blue-500 rounded-full"
-                      ></motion.div>
-                    </div>
-                  </motion.div>
-                ))}
+                {categoryData.skills.map((skill, skillIndex) => {
+                  // Calculate delay with max limit to prevent long delays
+                  const calculatedDelay = categoryIndex * ANIMATION_CONFIG.staggerDelay + 
+                                        skillIndex * 0.05;
+                  const delay = Math.min(calculatedDelay, ANIMATION_CONFIG.maxDelay);
+                  
+                  return (
+                    <motion.div
+                      key={skillIndex}
+                      variants={itemVariants}
+                      className="space-y-2"
+                    >
+                      <div className="flex justify-between items-center">
+                        <span className="font-semibold text-gray-700 dark:text-gray-300 text-sm sm:text-base">
+                          {skill.name}
+                        </span>
+                        <span className="text-xs sm:text-sm text-gray-500 dark:text-gray-300">
+                          {skill.level}%
+                        </span>
+                      </div>
+                      
+                      <div className="w-full h-2.5 sm:h-3 bg-gray-200 dark:bg-gray-600 rounded-full overflow-hidden">
+                        <motion.div
+                          initial={{ width: 0 }}
+                          animate={isInView ? { width: `${skill.level}%` } : { width: 0 }}
+                          transition={{
+                            duration: 0.6,
+                            delay: delay,
+                            ease: 'easeOut',
+                          }}
+                          style={{ willChange: 'width' }}
+                          className="h-full bg-blue-600 
+                                   dark:bg-blue-500 rounded-full"
+                        ></motion.div>
+                      </div>
+                    </motion.div>
+                  );
+                })}
               </div>
             </motion.div>
           ))}
