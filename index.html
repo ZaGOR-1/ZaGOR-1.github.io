@@ -3,10 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    
-    <!-- CRITICAL FIX для Safari: спрощений viewport -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
     <meta name="description" content="Portfolio of Denys Zahorovskyi - Full Stack Developer specializing in React, Node.js, PHP, C, and C#. 2nd year Software Engineering student at Zhytomyr Polytechnic." />
     <meta name="keywords" content="Denys Zahorovskyi, Full Stack Developer, React Developer, Frontend Developer, Backend Developer, Portfolio, Web Developer, Software Engineer" />
     <meta name="author" content="Denys Zahorovskyi" />
@@ -34,10 +31,6 @@
     
     <!-- Theme Color -->
     <meta name="theme-color" content="#2563eb" />
-    
-    <!-- Safari specific meta tags -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     
     <!-- Manifest -->
     <link rel="manifest" href="/manifest.json" />
@@ -95,30 +88,6 @@
       }
     }
     </script>
-    
-    <style>
-      /* CRITICAL: Safari black screen fix */
-      html, body {
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        overflow-x: hidden;
-        -webkit-overflow-scrolling: touch;
-        position: relative;
-      }
-      
-      body {
-        -webkit-text-size-adjust: 100%;
-        text-size-adjust: 100%;
-      }
-      
-      #root {
-        width: 100%;
-        min-height: 100vh;
-        position: relative;
-      }
-    </style>
   </head>
   <body>
     <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 bg-blue-600 text-white p-4 z-[100] focus:z-[100]">
