@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* --- 🌈 CSS Variables --- */
 :root {
   --bg-primary: #ffffff;
   --bg-secondary: #f9fafb;
@@ -20,6 +21,7 @@
   --border-color: #4b5563;
 }
 
+/* --- Reset --- */
 * {
   margin: 0;
   padding: 0;
@@ -31,24 +33,9 @@ html {
   overflow-x: hidden;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--bg-primary);
@@ -63,6 +50,7 @@ body {
   min-height: 100vh;
 }
 
+/* --- Glass Effect --- */
 .glass-effect {
   background: rgba(255, 255, 255, 0.95);
   border: 1px solid rgba(229, 231, 235, 0.8);
@@ -75,41 +63,7 @@ body {
   box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.1);
 }
 
-.gradient-text {
-  color: #2563eb;
-}
-
-.dark .gradient-text {
-  color: #60a5fa;
-}
-
-.gradient-border {
-  position: relative;
-  border-radius: 50%;
-  border: 4px solid #2563eb;
-}
-
-.dark .gradient-border {
-  border: 4px solid #60a5fa;
-}
-
-.custom-scrollbar::-webkit-scrollbar {
-  width: 8px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: var(--bg-secondary);
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #2563eb;
-  border-radius: 4px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #1d4ed8;
-}
-
+/* --- Utilities --- */
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -164,6 +118,7 @@ body {
   @apply text-gray-600 dark:text-gray-300 text-center mb-8 sm:mb-10 md:mb-12 text-base sm:text-lg md:text-xl px-4;
 }
 
+/* --- Screen Reader --- */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -188,31 +143,50 @@ body {
   white-space: normal;
 }
 
-/* --- 🧠 Safari / Mobile Rendering Fix --- */
+/* --- 🧠 Safari / Mobile Rendering Fix (Optimized) --- */
 @supports (-webkit-touch-callout: none) {
-  /* Вимикаємо GPU-трансформації */
-  .glass-effect {
-    transform: none !important;
-    will-change: auto !important;
-  }
 
-  /* Фіксимо backdrop-filter при масштабуванні */
+  /* Glass-effect оптимізовано для рендерингу при зумі */
+  .glass-effect,
   .glass-blur {
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
+    transform: none !important;
+    -webkit-transform: none !important;
+    will-change: auto !important;
+    -webkit-backface-visibility: visible;
+    backface-visibility: visible;
+
+    -webkit-backdrop-filter: saturate(180%) blur(10px);
+    backdrop-filter: saturate(180%) blur(10px);
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(229, 231, 235, 0.8);
   }
 
-  /* Стабілізуємо рендеринг під час pinch-to-zoom */
+  .dark .glass-effect {
+    background: rgba(45, 55, 72, 0.85);
+    border: 1px solid rgba(75, 85, 99, 0.5);
+    box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  /* Body без perspective і translate3d для стабільного масштабування */
   body {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-    backface-visibility: hidden;
-    perspective: 1000;
+    transform: none !important;
+    perspective: none !important;
+    backface-visibility: visible;
+    -webkit-transform: none !important;
+    -webkit-perspective: none !important;
   }
 
-  /* Уникаємо зависань скролу */
+  /* HTML і body з нормальним скролом та масштабуванням */
   html, body {
-    overscroll-behavior: none;
+    overscroll-behavior: auto;
     -webkit-overflow-scrolling: touch;
+  }
+
+  /* Фікс для pinch-to-zoom */
+  @media (max-width: 1024px) {
+    html {
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
   }
 }
