@@ -31,7 +31,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-50 
-                    transition-colors duration-200 relative overflow-x-hidden">
+                    transition-colors duration-200 relative">
       <motion.div
         className="fixed top-0 left-0 right-0 h-2 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 
                    dark:from-blue-400 dark:via-purple-400 dark:to-pink-400
