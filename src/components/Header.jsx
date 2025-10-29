@@ -125,7 +125,7 @@ const Header = ({ language, setLanguage, darkMode, setDarkMode, translations }) 
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="lg:hidden overflow-hidden"
+              className="lg:hidden overflow-hidden bg-white dark:bg-gray-800 rounded-lg mt-2 shadow-lg"
             >
               <div className="py-4 space-y-3">
                 {navItems.map((item) => (
