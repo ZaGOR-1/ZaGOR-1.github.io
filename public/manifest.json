@@ -1,0 +1,16 @@
+{
+  "name": "Denys Zahorovskyi - Portfolio",
+  "short_name": "DZ Portfolio",
+  "description": "Full Stack Developer Portfolio - Denys Zahorovskyi",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "icons": [
+    {
+      "src": "/vite.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    }
+  ]
+}

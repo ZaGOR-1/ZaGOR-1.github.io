@@ -1,0 +1,167 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f9fafb;
+  --bg-card: #ffffff;
+  --text-primary: #111111;
+  --text-secondary: #6b7280;
+  --border-color: #e5e7eb;
+}
+
+.dark {
+  --bg-primary: #1f2937;
+  --bg-secondary: #374151;
+  --bg-card: #2d3748;
+  --text-primary: #f9fafb;
+  --text-secondary: #e5e7eb;
+  --border-color: #4b5563;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+  width: 100%;
+  text-rendering: optimizeLegibility;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.glass-effect {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(229, 231, 235, 0.8);
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.dark .glass-effect {
+  background: rgba(45, 55, 72, 0.95);
+  border: 1px solid rgba(75, 85, 99, 0.5);
+  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.1);
+}
+
+.gradient-text {
+  color: #2563eb;
+}
+
+.dark .gradient-text {
+  color: #60a5fa;
+}
+
+.gradient-border {
+  position: relative;
+  border-radius: 50%;
+  border: 4px solid #2563eb;
+}
+
+.dark .gradient-border {
+  border: 4px solid #60a5fa;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #2563eb;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #1d4ed8;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+.section-padding {
+  @apply py-12 px-4 sm:py-16 sm:px-6 md:py-20 md:px-8 lg:px-16;
+}
+
+.container-custom {
+  @apply max-w-7xl mx-auto w-full;
+}
+
+.card-hover {
+  @apply transition-all duration-200 hover:shadow-lg;
+}
+
+.btn-primary {
+  @apply bg-blue-600 hover:bg-blue-700 
+         text-white font-semibold py-2 px-4 sm:py-3 sm:px-6 rounded-lg transition-colors duration-200 
+         shadow-md hover:shadow-lg text-sm sm:text-base;
+}
+
+.dark .btn-primary {
+  @apply bg-blue-600 hover:bg-blue-700;
+}
+
+.btn-secondary {
+  @apply border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white 
+         font-semibold py-2 px-4 sm:py-3 sm:px-6 rounded-lg transition-all duration-200 
+         text-sm sm:text-base;
+}
+
+.dark .btn-secondary {
+  @apply border-2 border-blue-400 text-blue-400 hover:bg-blue-500 hover:text-white hover:border-blue-500;
+}
+
+.input-field {
+  @apply w-full px-4 py-3 rounded-lg bg-white dark:bg-gray-800 
+         border-2 border-gray-200 dark:border-gray-700 
+         focus:border-blue-500 dark:focus:border-blue-500 
+         focus:outline-none transition-colors duration-300
+         text-gray-900 dark:text-white;
+}
+
+.section-title {
+  @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-4;
+}
+
+.section-subtitle {
+  @apply text-gray-600 dark:text-gray-300 text-center mb-8 sm:mb-10 md:mb-12 text-base sm:text-lg md:text-xl px-4;
+}
