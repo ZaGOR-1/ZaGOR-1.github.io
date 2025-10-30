@@ -9,7 +9,7 @@ const Projects = ({ language, translations }) => {
   const t = translations[language];
   const [activeFilter, setActiveFilter] = useState('all');
 
-  const projects = [
+  const projects = useMemo(() => [
     {
       id: 1,
       title: language === 'en' ? 'E-commerce Platform' : 'E-commerce Платформа',
@@ -82,7 +82,7 @@ const Projects = ({ language, translations }) => {
       liveUrl: 'https://demo.example.com',
       githubUrl: 'https://github.com',
     },
-  ];
+  ], [language]);
 
   const filters = useMemo(() => [
     { id: 'all', label: language === 'en' ? 'All' : 'Всі' },
