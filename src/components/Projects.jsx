@@ -138,13 +138,18 @@ const Projects = ({ language, translations }) => {
         </motion.div>
 
         <motion.div
+          key={activeFilter}
           variants={containerVariants}
+          initial="visible"
+          animate="visible"
           className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
         >
           {filteredProjects.map((project) => (
             <motion.div
               key={project.id}
               variants={itemVariants}
+              initial="visible"
+              animate="visible"
               layout
               className="glass-effect rounded-2xl overflow-hidden group hover:shadow-2xl transition-shadow duration-300"
             >
