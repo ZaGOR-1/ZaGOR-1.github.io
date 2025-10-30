@@ -1,9 +1,10 @@
 import { useMemo, useCallback } from 'react';
 import { Heart, Github, Linkedin, Send, Mail } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { useScrollToSection } from '../hooks/useScrollProgress';
 
-const Footer = ({ language, translations }) => {
-  const t = translations[language];
+const Footer = () => {
+  const { t, i18n } = useTranslation();
   const scrollToSection = useScrollToSection();
 
   const socialLinks = useMemo(() => [
@@ -26,7 +27,7 @@ const Footer = ({ language, translations }) => {
           <div>
             <h3 className="text-xl sm:text-2xl font-bold gradient-text mb-3 sm:mb-4">Denys Zahorovskyi</h3>
             <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300">
-              {language === 'en'
+              {i18n.language === 'en'
                 ? 'Frontend Developer passionate about creating beautiful and functional web applications.'
                 : 'Frontend Developer, який створює красиві та функціональні веб-додатки.'}
             </p>
@@ -34,7 +35,7 @@ const Footer = ({ language, translations }) => {
 
           <div>
             <h4 className="text-base sm:text-lg font-bold mb-3 sm:mb-4">
-              {language === 'en' ? 'Quick Links' : 'Швидкі посилання'}
+              {i18n.language === 'en' ? 'Quick Links' : 'Швидкі посилання'}
             </h4>
             <ul className="space-y-2">
               {['home', 'about', 'skills', 'contact'].map((section) => (
@@ -44,7 +45,7 @@ const Footer = ({ language, translations }) => {
                     className="text-sm sm:text-base text-gray-600 dark:text-gray-300 hover:text-blue-500 
                              dark:hover:text-blue-400 transition-colors"
                   >
-                    {translations[language].nav[section]}
+                    {t(`nav.${section}`)}
                   </button>
                 </li>
               ))}
@@ -53,7 +54,7 @@ const Footer = ({ language, translations }) => {
 
           <div>
             <h4 className="text-base sm:text-lg font-bold mb-3 sm:mb-4">
-              {language === 'en' ? 'Connect' : 'Соціальні мережі'}
+              {i18n.language === 'en' ? 'Connect' : 'Соціальні мережі'}
             </h4>
             <div className="flex gap-3 sm:gap-4 flex-wrap">
               {socialLinks.map((social, index) => (
@@ -76,8 +77,8 @@ const Footer = ({ language, translations }) => {
 
         <div className="border-t border-gray-200 dark:border-gray-700 pt-6 sm:pt-8 text-center">
           <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 flex items-center justify-center gap-2 flex-wrap">
-            © {currentYear} {t.footer.by}. {t.footer.rights} {t.footer.madeWith}{' '}
-            <Heart size={16} className="text-red-500" /> {language === 'en' ? 'and' : 'та'} React
+            © {currentYear} {t('footer.by')}. {t('footer.rights')} {t('footer.madeWith')}{' '}
+            <Heart size={16} className="text-red-500" /> {i18n.language === 'en' ? 'and' : 'та'} React
           </p>
         </div>
       </div>

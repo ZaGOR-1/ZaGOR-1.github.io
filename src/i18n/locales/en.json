@@ -1,0 +1,149 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "skills": "Skills",
+    "education": "Education",
+    "experience": "Experience",
+    "projects": "Projects",
+    "contact": "Contact",
+    "downloadCV": "Download CV"
+  },
+  "hero": {
+    "greeting": "Hi, I am",
+    "name": "Denys Zahorovskyi",
+    "role": "Full Stack Developer",
+    "description": "2nd year student at Zhytomyr Polytechnic, Software Engineering. Passionate about creating beautiful and functional web applications. Specializing in Frontend (React), Backend (PHP, Node.js), and development with C and C#.",
+    "downloadCV": "Download Resume PDF",
+    "contactMe": "Contact Me"
+  },
+  "about": {
+    "title": "About Me",
+    "subtitle": "Get to know me better",
+    "bio1": "I'm a 2nd year student at Zhytomyr Polytechnic, majoring in Software Engineering. I have a strong interest in Full Stack web development. I started with HTML and CSS, quickly moved to JavaScript, and fell in love with React. In parallel, I developed Backend skills working with PHP, Node.js, as well as C and C#. I enjoy solving complex problems on both Frontend and Backend.",
+    "bio2": "Throughout my studies, I have worked on various projects ranging from simple landing pages to full-stack web applications with server-side functionality. I am always eager to learn new technologies and improve my skills across different areas of software development.",
+    "bio3": "When I'm not coding, I enjoy reading tech blogs, contributing to open-source projects, and participating in hackathons. I believe in the power of technology to make the world a better place.",
+    "characteristics": {
+      "passionate": {
+        "title": "Passionate",
+        "description": "Love what I do and constantly learning"
+      },
+      "creative": {
+        "title": "Creative",
+        "description": "Find unique solutions to complex problems"
+      },
+      "teamPlayer": {
+        "title": "Team Player",
+        "description": "Work well in teams and value collaboration"
+      },
+      "dedicated": {
+        "title": "Dedicated",
+        "description": "Always give 100% to everything I do"
+      }
+    }
+  },
+  "skills": {
+    "title": "Skills",
+    "subtitle": "Technologies I work with",
+    "categories": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "tools": "Tools",
+      "soft": "Soft Skills"
+    },
+    "level": {
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced",
+      "expert": "Expert"
+    }
+  },
+  "education": {
+    "title": "Education",
+    "subtitle": "My academic journey",
+    "university": "Zhytomyr Polytechnic",
+    "degree": "Bachelor of Software Engineering",
+    "period": "2024 - 2028 (2nd year)",
+    "gpa": "GPA: 4.5/5.0",
+    "relevantCourses": "Relevant Courses:",
+    "courses": [
+      "Data Structures and Algorithms",
+      "Web Development",
+      "Database Systems",
+      "Object-Oriented Programming",
+      "Computer Networks",
+      "Software Engineering"
+    ],
+    "certificates": "Certificates:",
+    "certList": [
+      "React - The Complete Guide (Udemy)",
+      "JavaScript Algorithms and Data Structures (freeCodeCamp)",
+      "Responsive Web Design (freeCodeCamp)",
+      "Introduction to C (Sololearn)",
+      "C Intermediate (Sololearn)",
+      "Introduction to SQL (Sololearn)",
+      "SQL Intermediate (Sololearn)",
+      "Introduction to C# (Sololearn)"
+    ]
+  },
+  "experience": {
+    "title": "Experience",
+    "subtitle": "My professional journey",
+    "list": [
+      {
+        "company": "Tech StartUp",
+        "position": "Junior Frontend Developer (Internship)",
+        "period": "June 2024 - August 2024",
+        "description": [
+          "Developed and maintained React components for web applications",
+          "Collaborated with design team to implement UI/UX designs",
+          "Optimized application performance resulting in 30% improvement in load time",
+          "Participated in daily stand-ups and code reviews"
+        ]
+      },
+      {
+        "company": "Freelance",
+        "position": "Full Stack Web Developer",
+        "period": "March 2025 - Present",
+        "description": [
+          "Built responsive websites and web applications for small businesses and startups",
+          "Developed both Frontend (React) and Backend (PHP, Node.js) functionality",
+          "Provided consultation on web development best practices",
+          "Managed projects from concept to deployment",
+          "Successfully completed 10+ projects with high client satisfaction"
+        ]
+      }
+    ]
+  },
+  "projects": {
+    "title": "Projects",
+    "subtitle": "My recent work"
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Get in touch with me",
+    "form": {
+      "name": "Name",
+      "namePlaceholder": "Your name",
+      "email": "Email",
+      "emailPlaceholder": "Your email",
+      "message": "Message",
+      "messagePlaceholder": "Your message",
+      "send": "Send",
+      "sending": "Sending...",
+      "success": "Message sent successfully!",
+      "error": "Error sending message. Please try again."
+    },
+    "info": {
+      "email": "Email",
+      "phone": "Phone",
+      "location": "Location",
+      "locationValue": "Zhytomyr, Ukraine"
+    }
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "madeWith": "Made with",
+    "by": "Denys Zahorovskyi"
+  }
+}
