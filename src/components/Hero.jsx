@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { useMemo, useCallback } from 'react';
+import { useMemo, useCallback, memo } from 'react';
 import { Download, Mail, Github, Linkedin, Send } from 'lucide-react';
 import { useScrollToSection } from '../hooks/useScrollProgress';
 import { staggerContainerVariants, fadeInVariants } from '../utils/animations';
@@ -11,7 +11,7 @@ const SOCIAL_LINKS = [
   { icon: Mail, url: 'mailto:denys.zahorovskyi@example.com', label: 'Email' },
 ];
 
-const Hero = ({ language, translations }) => {
+const Hero = memo(({ language, translations }) => {
   const scrollToSection = useScrollToSection();
   const t = translations[language];
 
@@ -149,6 +149,8 @@ const Hero = ({ language, translations }) => {
       </motion.div>
     </section>
   );
-};
+});
+
+Hero.displayName = 'Hero';
 
 export default Hero;

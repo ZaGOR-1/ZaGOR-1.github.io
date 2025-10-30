@@ -1,6 +1,6 @@
-import { useEffect, useRef, useMemo } from 'react';
+import { useEffect, useRef, useMemo, memo } from 'react';
 
-const AnimatedBackground = ({ darkMode }) => {
+const AnimatedBackground = memo(({ darkMode }) => {
   const canvasRef = useRef(null);
   const mouseRef = useRef({ x: 0, y: 0 });
   const particlesRef = useRef([]);
@@ -179,6 +179,8 @@ const AnimatedBackground = ({ darkMode }) => {
       style={{ opacity: 0.4 }}
     />
   );
-};
+});
+
+AnimatedBackground.displayName = 'AnimatedBackground';
 
 export default AnimatedBackground;

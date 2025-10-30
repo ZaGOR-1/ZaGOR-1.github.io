@@ -1,11 +1,11 @@
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useCallback, useMemo, memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUp } from 'lucide-react';
 import { SCROLL_THROTTLE_DELAY } from '../utils/constants';
 
 const BACK_TO_TOP_THRESHOLD = 500;
 
-const BackToTop = () => {
+const BackToTop = memo(() => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -60,6 +60,8 @@ const BackToTop = () => {
       )}
     </AnimatePresence>
   );
-};
+});
+
+BackToTop.displayName = 'BackToTop';
 
 export default BackToTop;
