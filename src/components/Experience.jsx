@@ -1,6 +1,6 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useMemo } from 'react';
-import { Calendar, Briefcase, TrendingUp } from 'lucide-react';
+import { Calendar, Briefcase, TrendingUp, CheckCircle2 } from 'lucide-react';
 import { staggerContainerVariants, fadeInVariants } from '../utils/animations';
 
 const Experience = ({ language, translations }) => {
@@ -115,6 +115,8 @@ const Experience = ({ language, translations }) => {
           {t.experience.list.map((exp, index) => {
             const duration = calculateDuration(exp.period);
             const isLeft = index % 2 === 0;
+            const isCompleted = !exp.period.toLowerCase().includes('present') && 
+                               !exp.period.toLowerCase().includes('теперішній');
 
             return (
               <motion.div
@@ -161,19 +163,38 @@ const Experience = ({ language, translations }) => {
                     <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r 
                                   from-blue-600 via-purple-600 to-blue-600"></div>
                     
-                    {/* Duration Badge */}
-                    <motion.div 
-                      initial={{ opacity: 0, x: isLeft ? 20 : -20 }}
-                      animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: isLeft ? 20 : -20 }}
-                      transition={{ delay: 0.3 + index * 0.2 }}
-                      className={`absolute top-4 ${isLeft ? 'md:right-4' : 'md:left-4'} right-4
-                                bg-gradient-to-br from-blue-100 to-purple-100 
-                                dark:from-blue-900/30 dark:to-purple-900/30
-                                px-3 py-1 rounded-full text-xs font-bold
-                                text-blue-700 dark:text-blue-300`}
-                    >
-                      {duration} {language === 'uk' ? 'міс.' : 'mos.'}
-                    </motion.div>
+                    {/* Status Badges Container */}
+                    <div className="absolute top-4 right-4 flex flex-col gap-2 items-end">
+                      {/* Duration Badge */}
+                      <motion.div 
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
+                        transition={{ delay: 0.3 + index * 0.2 }}
+                        className="bg-gradient-to-br from-blue-100 to-purple-100 
+                                  dark:from-blue-900/30 dark:to-purple-900/30
+                                  px-3 py-1 rounded-full text-xs font-bold
+                                  text-blue-700 dark:text-blue-300 whitespace-nowrap"
+                      >
+                        {duration} {language === 'uk' ? 'міс.' : 'mos.'}
+                      </motion.div>
+
+                      {/* Completed Badge */}
+                      {isCompleted && (
+                        <motion.div 
+                          initial={{ opacity: 0, scale: 0 }}
+                          animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
+                          transition={{ delay: 0.4 + index * 0.2, type: "spring" }}
+                          className="bg-gradient-to-br from-green-100 to-emerald-100 
+                                    dark:from-green-900/30 dark:to-emerald-900/30
+                                    px-3 py-1 rounded-full text-xs font-bold
+                                    text-green-700 dark:text-green-300 
+                                    flex items-center gap-1 whitespace-nowrap"
+                        >
+                          <CheckCircle2 size={12} />
+                          {language === 'uk' ? 'Завершено' : 'Completed'}
+                        </motion.div>
+                      )}
+                    </div>
 
                     {/* Period */}
                     <div className="flex items-center gap-2 mb-3 text-blue-600 dark:text-blue-400">
@@ -182,7 +203,7 @@ const Experience = ({ language, translations }) => {
                     </div>
                     
                     {/* Position */}
-                    <h3 className="text-xl sm:text-2xl font-bold mb-2 pr-20">
+                    <h3 className="text-xl sm:text-2xl font-bold mb-2 pr-24 sm:pr-28">
                       {exp.position}
                     </h3>
                     
