@@ -1,6 +1,6 @@
-import { motion, useInView } from 'framer-motion';
+import { m as motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Calendar } from 'lucide-react';
+import { Calendar } from './Icons';
 
 const Experience = ({ language, translations }) => {
   const ref = useRef(null);

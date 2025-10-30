@@ -1,6 +1,6 @@
-import { motion, useInView } from 'framer-motion';
+import { m as motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { GraduationCap, Award, BookOpen } from 'lucide-react';
+import { GraduationCap, Award, BookOpen } from './Icons';
 
 const Education = ({ language, translations }) => {
   const ref = useRef(null);

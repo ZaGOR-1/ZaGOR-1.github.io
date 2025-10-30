@@ -1,6 +1,6 @@
-import { motion, useInView } from 'framer-motion';
+import { m as motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Heart, Lightbulb, Users, Target } from 'lucide-react';
+import { Heart, Lightbulb, Users, Target } from './Icons';
 
 const About = ({ language, translations }) => {
   const ref = useRef(null);
