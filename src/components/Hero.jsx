@@ -1,11 +1,12 @@
+import { useMemo, memo } from 'react';
 import { m as motion } from 'framer-motion';
 import { Download, Mail, Github, Linkedin, Send } from './Icons';
 import { useScrollToSection } from '../hooks/useScrollProgress';
 import { SOCIAL_LINKS } from '../config/constants';
 
-const Hero = ({ language, translations }) => {
+const Hero = memo(({ language, translations }) => {
   const scrollToSection = useScrollToSection();
-  const t = translations[language];
+  const t = useMemo(() => translations[language], [translations, language]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -32,10 +33,10 @@ const Hero = ({ language, translations }) => {
     return icons[iconName] || Mail;
   };
 
-  const socialLinks = SOCIAL_LINKS.map(link => ({
+  const socialLinks = useMemo(() => SOCIAL_LINKS.map(link => ({
     ...link,
     IconComponent: getIconComponent(link.icon),
-  }));
+  })), []);
 
   return (
     <section
@@ -144,6 +145,8 @@ const Hero = ({ language, translations }) => {
       </motion.div>
     </section>
   );
-};
+});
+
+Hero.displayName = 'Hero';
 
 export default Hero;

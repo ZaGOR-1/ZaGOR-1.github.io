@@ -1,10 +1,11 @@
+import { useMemo, useCallback, memo } from 'react';
 import { Heart, Github, Linkedin, Send, Mail } from './Icons';
 import { SOCIAL_LINKS } from '../config/constants';
 
-const Footer = ({ language, translations }) => {
-  const t = translations[language];
+const Footer = memo(({ language, translations }) => {
+  const t = useMemo(() => translations[language], [translations, language]);
 
-  const getIconComponent = (iconName) => {
+  const getIconComponent = useCallback((iconName) => {
     const icons = {
       Github,
       Linkedin,
@@ -12,12 +13,12 @@ const Footer = ({ language, translations }) => {
       Mail,
     };
     return icons[iconName] || Mail;
-  };
+  }, []);
 
-  const socialLinks = SOCIAL_LINKS.map(link => ({
+  const socialLinks = useMemo(() => SOCIAL_LINKS.map(link => ({
     ...link,
     IconComponent: getIconComponent(link.icon),
-  }));
+  })), [getIconComponent]);
 
   return (
     <footer className="bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
@@ -94,6 +95,8 @@ const Footer = ({ language, translations }) => {
       </div>
     </footer>
   );
-};
+});
+
+Footer.displayName = 'Footer';
 
 export default Footer;

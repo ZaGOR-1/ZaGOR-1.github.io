@@ -1,13 +1,13 @@
 import { m as motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useMemo, memo } from 'react';
 import { Heart, Lightbulb, Users, Target } from './Icons';
 
-const About = ({ language, translations }) => {
+const About = memo(({ language, translations }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
-  const t = translations[language];
+  const t = useMemo(() => translations[language], [translations, language]);
 
-  const characteristics = [
+  const characteristics = useMemo(() => [
     {
       icon: Heart,
       title: t.about.characteristics.passionate.title,
@@ -28,7 +28,7 @@ const About = ({ language, translations }) => {
       title: t.about.characteristics.dedicated.title,
       description: t.about.characteristics.dedicated.description,
     },
-  ];
+  ], [t]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -114,6 +114,8 @@ const About = ({ language, translations }) => {
       </motion.div>
     </section>
   );
-};
+});
+
+About.displayName = 'About';
 
 export default About;
