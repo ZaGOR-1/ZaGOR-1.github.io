@@ -17,8 +17,6 @@ A modern, responsive portfolio website built with React, Tailwind CSS, and Frame
 
 ## 🚀 Quick Start
 
-**New here? Start with [Getting Started Guide](./GETTING_STARTED.md)** - Complete setup in 5-10 minutes!
-
 ### Prerequisites
 
 - Node.js (v14 or higher)
@@ -233,77 +231,100 @@ experience: {
 
 ## 🌐 Deployment
 
-This project is **pre-configured** for automatic deployment to GitHub Pages with custom domain support!
+### GitHub Pages (Automatic Deployment) ⭐
 
-### Quick Deploy to GitHub Pages ⭐
+This project is **already configured** for automatic deployment to GitHub Pages with custom domain support! 
 
-1. Go to Settings → Pages in your repository
-2. Select **"GitHub Actions"** as source
-3. Push to `main` branch
-4. Your site will be live at `https://zagor-1.github.io` or `https://zagor.me`
+**Quick Setup:**
 
-📖 **Complete deployment guide:** [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md)
+1. Go to your repository settings on GitHub: https://github.com/ZaGOR-1/ZaGOR-1.github.io
+2. Navigate to Settings → Pages
+3. Under "Source", select **"GitHub Actions"**
+4. Push your changes to the `main` branch
+5. Your site will be live at:
+   - **Primary:** `https://zagor.me` (custom domain)
+   - **GitHub Pages:** `https://zagor-1.github.io`
 
-**Supports:**
-- ✅ GitHub Pages (automatic deployment)
-- ✅ Vercel (instant preview deployments)
-- ✅ Netlify (forms and serverless functions)
-- ✅ Custom domains (zagor.me)
-- ✅ HTTPS/SSL certificates (automatic)
+Every time you push to `main`, your site will automatically rebuild and redeploy!
+
+📖 **Detailed instructions:**
+- [GITHUB_PAGES_SETUP_UK.md](./GITHUB_PAGES_SETUP_UK.md) (in Ukrainian)
+- [CUSTOM_DOMAIN_SETUP.md](./CUSTOM_DOMAIN_SETUP.md) (in English - Custom Domain Guide)
+
+**What's already configured:**
+- ✅ GitHub Actions workflow (`.github/workflows/deploy.yml`)
+- ✅ Vite base URL configured for root domain (`/`)
+- ✅ `.nojekyll` file to prevent Jekyll processing
+- ✅ Homepage URL in package.json pointing to zagor.me
+- ✅ CNAME file for custom domain configuration
+
+### Deploy to Vercel
+
+1. Install Vercel CLI:
+```bash
+npm install -g vercel
+```
+
+2. Deploy:
+```bash
+vercel
+```
+
+### Deploy to Netlify
+
+1. Install Netlify CLI:
+```bash
+npm install -g netlify-cli
+```
+
+2. Build the project:
+```bash
+npm run build
+```
+
+3. Deploy:
+```bash
+netlify deploy --prod --dir=dist
+```
+
+📖 **More deployment options:** See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed guides
 
 ## 🛠️ Technologies Used
 
-- **React 19** - UI library
+- **React** - UI library
 - **Vite** - Build tool
 - **Tailwind CSS** - Styling
 - **Framer Motion** - Animations
 - **Lucide React** - Icons
-- **PDFKit** - Resume generator
 
-## ⚡ Performance
+## 📝 Tips for Students
 
-This portfolio is **heavily optimized** for speed:
-- 87% smaller main bundle (214 KB → 27 KB)
-- Lazy loading for all components
-- Service Worker for offline support
-- Optimized images and fonts
-- 90+ Lighthouse performance score
-
-📖 **Learn more:** [OPTIMIZATION_GUIDE.md](./OPTIMIZATION_GUIDE.md) | [CACHING_GUIDE.md](./CACHING_GUIDE.md)
-
-## 📚 Documentation
-
-### Getting Started
-- **[GETTING_STARTED.md](./GETTING_STARTED.md)** - Complete setup guide (5-10 minutes)
-- **[CUSTOMIZATION.md](./CUSTOMIZATION.md)** - How to customize content, colors, and images
-- **[DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md)** - Deploy to GitHub Pages, Vercel, or Netlify
-
-### Guides
-- **[OPTIMIZATION_GUIDE.md](./OPTIMIZATION_GUIDE.md)** - Performance optimizations explained
-- **[CACHING_GUIDE.md](./CACHING_GUIDE.md)** - Caching strategies and PWA features
-- **[PERFORMANCE_GUIDE.md](./PERFORMANCE_GUIDE.md)** - Testing and monitoring performance
-
-### Reference
-- **[FEATURES.md](./FEATURES.md)** - Complete list of features
-- **[CHANGELOG.md](./CHANGELOG.md)** - Version history and changes
-- **[CONTRIBUTING.md](./CONTRIBUTING.md)** - How to contribute
+1. **Keep it Simple**: Start by updating text and images, then gradually customize colors and layouts
+2. **Test Responsiveness**: Check your site on different screen sizes
+3. **Optimize Images**: Compress images before adding them to reduce load time
+4. **Update Content Regularly**: Keep your projects and skills up to date
+5. **Add Analytics**: Consider adding Google Analytics to track visitors
+6. **SEO**: Update meta tags in `index.html` for better search engine visibility
+7. **Performance**: Run `npm run build` and check the bundle size
 
 ## 🐛 Troubleshooting
 
 ### Images Not Showing
-- Ensure images are in `public/images/` directory
-- Check file paths in `translations.js`
-- Site uses fallback placeholders if images missing
+
+- Make sure images are in the `public/images/` directory
+- Check that image paths in `translations.js` are correct
+- The site uses fallback placeholder images if originals are not found
 
 ### Build Errors
-```bash
-rm -rf node_modules package-lock.json
-npm install
-npm run build
-```
 
-### More Help
-See [GETTING_STARTED.md](./GETTING_STARTED.md#troubleshooting) for detailed troubleshooting.
+- Clear node_modules and reinstall: `rm -rf node_modules && npm install`
+- Make sure you're using Node.js v14 or higher
+
+### Styling Issues
+
+- Clear browser cache
+- Check that Tailwind CSS is properly configured
+- Verify that `index.css` imports Tailwind directives
 
 ## 📄 License
 
@@ -311,7 +332,7 @@ This project is open source and available under the MIT License.
 
 ## 🤝 Contributing
 
-Contributions welcome! See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
+Feel free to fork this project and customize it for your own use. If you find bugs or have suggestions, please open an issue.
 
 ## 📧 Contact
 
@@ -319,4 +340,4 @@ For questions or support, please contact [your.email@example.com](mailto:your.em
 
 ---
 
-**Made with ❤️ and React** | **⚡ Optimized for Performance** | **🌐 Deploy in Minutes**
+**Made with ❤️ and React**

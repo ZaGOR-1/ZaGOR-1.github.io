@@ -2,25 +2,32 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Denys Zahorovskyi - Full Stack Developer specializing in React, Node.js, PHP, C, and C#. 2nd year Software Engineering student at Zhytomyr Polytechnic." />
-    <meta name="keywords" content="Denys Zahorovskyi, Full Stack Developer, React Developer, Frontend Developer, Backend Developer, Portfolio, Web Developer, Software Engineer, Zhytomyr, Ukraine" />
+    <meta name="description" content="Portfolio of Denys Zahorovskyi - Full Stack Developer specializing in React, Node.js, PHP, C, and C#. 2nd year Software Engineering student at Zhytomyr Polytechnic." />
+    <meta name="keywords" content="Denys Zahorovskyi, Full Stack Developer, React Developer, Frontend Developer, Backend Developer, Portfolio, Web Developer, Software Engineer" />
     <meta name="author" content="Denys Zahorovskyi" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://zagor.me/" />
+    
+    <!-- Alternate languages (hreflang) -->
+    <link rel="alternate" hreflang="en" href="https://zagor.me/?lang=en" />
+    <link rel="alternate" hreflang="uk" href="https://zagor.me/?lang=uk" />
+    <link rel="alternate" hreflang="x-default" href="https://zagor.me/" />
     
     <!-- Open Graph Meta Tags -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Denys Zahorovskyi - Full Stack Developer Portfolio" />
     <meta property="og:description" content="2nd year Software Engineering student specializing in Full Stack Development. Check out my projects and skills!" />
-    <meta property="og:url" content="https://zagor.me" />
-    <meta property="og:image" content="https://zagor.me/images/og-image.jpg" />
-    <meta property="og:site_name" content="Denys Zahorovskyi Portfolio" />
+    <meta property="og:url" content="https://zahorovskyi.dev" />
+    <meta property="og:image" content="/images/profile.jpg" />
     
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Denys Zahorovskyi - Full Stack Developer" />
     <meta name="twitter:description" content="Full Stack Developer specializing in React, Node.js, PHP, C, and C#" />
-    <meta name="twitter:image" content="https://zagor.me/images/og-image.jpg" />
+    <meta name="twitter:image" content="/images/profile.jpg" />
     
     <!-- Theme Color -->
     <meta name="theme-color" content="#2563eb" />
@@ -28,57 +35,25 @@
     <!-- Manifest -->
     <link rel="manifest" href="/manifest.json" />
     
-    <!-- Apple Touch Icon -->
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    
     <title>Denys Zahorovskyi - Full Stack Developer Portfolio</title>
     
     <!-- Preconnect to improve performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     
-    <!-- DNS prefetch for external resources -->
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-    
-    <!-- Google Fonts - Inter with font-display swap for better performance -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    
-    <!-- Preload critical font for better performance -->
-    <link rel="preload" href="https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2" as="font" type="font/woff2" crossorigin />
-    
-    <!-- Preload critical assets -->
-    <link rel="preload" href="/images/profile.jpg" as="image" type="image/jpeg" fetchpriority="high" />
-    
-    <!-- Prevent FOUC (Flash of Unstyled Content) for dark mode -->
-    <script>
-      (function() {
-        try {
-          const darkMode = localStorage.getItem('darkMode');
-          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-          
-          if (darkMode === 'true' || (darkMode === null && prefersDark)) {
-            document.documentElement.classList.add('dark');
-          }
-        } catch (e) {
-          console.error('Error loading theme:', e);
-        }
-      })();
-    </script>
-    
-    <!-- Structured Data for SEO -->
+    <!-- Structured Data (Schema.org) for SEO -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Person",
       "name": "Denys Zahorovskyi",
-      "url": "https://zagor.me",
+      "alternateName": "Загоровський Денис",
       "jobTitle": "Full Stack Developer",
-      "worksFor": {
-        "@type": "EducationalOrganization",
-        "name": "Zhytomyr Polytechnic"
-      },
-      "description": "Full Stack Developer specializing in React, Node.js, PHP, C, and C#",
+      "description": "Full Stack Developer specializing in React, Node.js, PHP, C, and C#. 2nd year Software Engineering student at Zhytomyr Polytechnic.",
+      "url": "https://zagor.me",
+      "image": "https://zagor.me/images/profile.jpg",
+      "email": "denys.zahorovskyi@example.com",
+      "telephone": "+380123456789",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Zhytomyr",
@@ -86,12 +61,38 @@
       },
       "sameAs": [
         "https://github.com/ZaGOR-1",
-        "https://www.linkedin.com/in/denys-zahorovskyi"
-      ]
+        "https://linkedin.com/in/denys-zahorovskyi"
+      ],
+      "knowsAbout": [
+        "React",
+        "JavaScript",
+        "Node.js",
+        "PHP",
+        "C Programming",
+        "C#",
+        "Full Stack Development",
+        "Web Development",
+        "Frontend Development",
+        "Backend Development"
+      ],
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "Zhytomyr Polytechnic",
+        "sameAs": "https://ztu.edu.ua"
+      },
+      "hasOccupation": {
+        "@type": "Occupation",
+        "name": "Full Stack Web Developer",
+        "occupationalCategory": "15-1254.00",
+        "skills": "React, Node.js, PHP, C, C#, MongoDB, SQL, Git, Tailwind CSS"
+      }
     }
     </script>
   </head>
   <body>
+    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 bg-blue-600 text-white p-4 z-[100] focus:z-[100]">
+      Skip to main content
+    </a>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

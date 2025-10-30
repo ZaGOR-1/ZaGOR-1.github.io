@@ -1,7 +1,6 @@
-import { m as motion, useInView } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
-import { Mail, MapPin, Phone, Send } from './Icons';
-import { CONTACT_INFO } from '../config/constants';
+import { Mail, MapPin, Phone, Send } from 'lucide-react';
 
 const Contact = ({ language, translations }) => {
   const ref = useRef(null);
@@ -27,9 +26,7 @@ const Contact = ({ language, translations }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setFormStatus('');
 
-    // Client-side validation
     if (!formData.name || !formData.email || !formData.message) {
       setFormStatus('error');
       setIsSubmitting(false);
@@ -43,60 +40,34 @@ const Contact = ({ language, translations }) => {
       return;
     }
 
-    try {
-      // FormSubmit.co integration
-      // Replace with your actual email after setup
-      const response = await fetch('https://formsubmit.co/ajax/zahorovskyi.denys@gmail.com', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          message: formData.message,
-          _subject: `New Contact from ${formData.name}`,
-          _template: 'table',
-          _captcha: 'false'
-        })
-      });
-
-      if (response.ok) {
-        setFormStatus('success');
-        setFormData({ name: '', email: '', message: '' });
-      } else {
-        setFormStatus('error');
-      }
-    } catch (error) {
-      console.error('Form submission error:', error);
-      setFormStatus('error');
-    } finally {
+    setTimeout(() => {
+      setFormStatus('success');
       setIsSubmitting(false);
+      setFormData({ name: '', email: '', message: '' });
       
       setTimeout(() => {
         setFormStatus('');
-      }, 5000);
-    }
+      }, 3000);
+    }, 1500);
   };
 
   const contactInfo = [
     {
       icon: Mail,
       label: t.contact.info.email,
-      value: CONTACT_INFO.email,
-      link: `mailto:${CONTACT_INFO.email}`,
+      value: 'denys.zahorovskyi@example.com',
+      link: 'mailto:denys.zahorovskyi@example.com',
     },
     {
       icon: Phone,
       label: t.contact.info.phone,
-      value: CONTACT_INFO.phone,
-      link: CONTACT_INFO.phoneLink,
+      value: '+380 (12) 345-67-89',
+      link: 'tel:+380123456789',
     },
     {
       icon: MapPin,
       label: t.contact.info.location,
-      value: CONTACT_INFO.location[language],
+      value: t.contact.info.locationValue,
       link: null,
     },
   ];
@@ -193,7 +164,6 @@ const Contact = ({ language, translations }) => {
                   placeholder={t.contact.form.namePlaceholder}
                   className="input-field"
                   required
-                  disabled={isSubmitting}
                 />
               </div>
 
@@ -210,7 +180,6 @@ const Contact = ({ language, translations }) => {
                   placeholder={t.contact.form.emailPlaceholder}
                   className="input-field"
                   required
-                  disabled={isSubmitting}
                 />
               </div>
 
@@ -227,7 +196,6 @@ const Contact = ({ language, translations }) => {
                   rows="5"
                   className="input-field resize-none"
                   required
-                  disabled={isSubmitting}
                 ></textarea>
               </div>
 

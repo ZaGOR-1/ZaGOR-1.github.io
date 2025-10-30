@@ -1,12 +1,10 @@
-import { useMemo, memo } from 'react';
-import { m as motion } from 'framer-motion';
-import { Download, Mail, Github, Linkedin, Send } from './Icons';
+import { motion } from 'framer-motion';
+import { Download, Mail, Github, Linkedin, Send } from 'lucide-react';
 import { useScrollToSection } from '../hooks/useScrollProgress';
-import { SOCIAL_LINKS } from '../config/constants';
 
-const Hero = memo(({ language, translations }) => {
+const Hero = ({ language, translations }) => {
   const scrollToSection = useScrollToSection();
-  const t = useMemo(() => translations[language], [translations, language]);
+  const t = translations[language];
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -28,15 +26,12 @@ const Hero = memo(({ language, translations }) => {
     },
   };
 
-  const getIconComponent = (iconName) => {
-    const icons = { Github, Linkedin, Send, Mail };
-    return icons[iconName] || Mail;
-  };
-
-  const socialLinks = useMemo(() => SOCIAL_LINKS.map(link => ({
-    ...link,
-    IconComponent: getIconComponent(link.icon),
-  })), []);
+  const socialLinks = [
+    { icon: Github, url: 'https://github.com', label: 'GitHub' },
+    { icon: Linkedin, url: 'https://linkedin.com', label: 'LinkedIn' },
+    { icon: Send, url: 'https://t.me/', label: 'Telegram' },
+    { icon: Mail, url: 'mailto:denys.zahorovskyi@example.com', label: 'Email' },
+  ];
 
   return (
     <section
@@ -116,9 +111,9 @@ const Hero = memo(({ language, translations }) => {
                   className="p-2.5 sm:p-3 rounded-full bg-gray-200 dark:bg-gray-600 hover:bg-blue-600 
                            dark:hover:bg-blue-600
                            hover:text-white text-gray-700 dark:text-gray-200 transition-colors duration-200"
-                  aria-label={social.name}
+                  aria-label={social.label}
                 >
-                  <social.IconComponent size={20} className="sm:w-6 sm:h-6" />
+                  <social.icon size={20} className="sm:w-6 sm:h-6" />
                 </a>
               ))}
             </motion.div>
@@ -132,11 +127,9 @@ const Hero = memo(({ language, translations }) => {
               <img
                 src="/images/profile.jpg"
                 alt={t.hero.name}
-                width="400"
-                height="400"
                 className="w-full h-full object-cover"
                 loading="eager"
-                fetchPriority="high"
+                fetchpriority="high"
                 onError={(e) => {
                   e.target.src = 'https://ui-avatars.com/api/?name=Denys+Zahorovskyi&size=400&background=3b82f6&color=fff&bold=true';
                 }}
@@ -147,8 +140,6 @@ const Hero = memo(({ language, translations }) => {
       </motion.div>
     </section>
   );
-});
-
-Hero.displayName = 'Hero';
+};
 
 export default Hero;

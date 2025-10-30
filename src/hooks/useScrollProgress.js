@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 
 const throttle = (func, delay) => {
   let timeoutId;
@@ -22,20 +22,20 @@ const throttle = (func, delay) => {
 export const useScrollProgress = () => {
   const [progress, setProgress] = useState(0);
 
-  const updateProgress = useCallback(() => {
-    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-    if (scrollHeight <= 0) {
-      setProgress(0);
-      return;
-    }
-    const scrolled = Math.min(100, Math.max(0, (window.scrollY / scrollHeight) * 100));
-    setProgress(scrolled);
-  }, []);
-
-  const throttledUpdate = useMemo(() => throttle(updateProgress, 100), [updateProgress]);
-
   useEffect(() => {
+    const updateProgress = () => {
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (scrollHeight <= 0) {
+        setProgress(0);
+        return;
+      }
+      const scrolled = Math.min(100, Math.max(0, (window.scrollY / scrollHeight) * 100));
+      setProgress(scrolled);
+    };
+
     updateProgress();
+
+    const throttledUpdate = throttle(updateProgress, 100);
 
     window.addEventListener('scroll', throttledUpdate, { passive: true });
     window.addEventListener('resize', throttledUpdate, { passive: true });
@@ -44,13 +44,13 @@ export const useScrollProgress = () => {
       window.removeEventListener('scroll', throttledUpdate);
       window.removeEventListener('resize', throttledUpdate);
     };
-  }, [updateProgress, throttledUpdate]);
+  }, []);
 
   return progress;
 };
 
 export const useScrollToSection = () => {
-  const scrollToSection = useCallback((id) => {
+  const scrollToSection = (id) => {
     const element = document.getElementById(id);
     if (element) {
       const offset = id === 'home' ? 0 : 80;
@@ -62,7 +62,7 @@ export const useScrollToSection = () => {
         behavior: 'smooth',
       });
     }
-  }, []);
+  };
 
   return scrollToSection;
 };

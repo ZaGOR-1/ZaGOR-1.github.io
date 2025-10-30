@@ -1,24 +1,14 @@
-import { useMemo, useCallback, memo } from 'react';
-import { Heart, Github, Linkedin, Send, Mail } from './Icons';
-import { SOCIAL_LINKS } from '../config/constants';
+import { Heart, Github, Linkedin, Send, Mail } from 'lucide-react';
 
-const Footer = memo(({ language, translations }) => {
-  const t = useMemo(() => translations[language], [translations, language]);
+const Footer = ({ language, translations }) => {
+  const t = translations[language];
 
-  const getIconComponent = useCallback((iconName) => {
-    const icons = {
-      Github,
-      Linkedin,
-      Send,
-      Mail,
-    };
-    return icons[iconName] || Mail;
-  }, []);
-
-  const socialLinks = useMemo(() => SOCIAL_LINKS.map(link => ({
-    ...link,
-    IconComponent: getIconComponent(link.icon),
-  })), [getIconComponent]);
+  const socialLinks = [
+    { icon: Github, url: 'https://github.com', label: 'GitHub' },
+    { icon: Linkedin, url: 'https://linkedin.com', label: 'LinkedIn' },
+    { icon: Send, url: 'https://t.me/', label: 'Telegram' },
+    { icon: Mail, url: 'mailto:denys.zahorovskyi@example.com', label: 'Email' },
+  ];
 
   return (
     <footer className="bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
@@ -28,8 +18,8 @@ const Footer = memo(({ language, translations }) => {
             <h3 className="text-xl sm:text-2xl font-bold gradient-text mb-3 sm:mb-4">Denys Zahorovskyi</h3>
             <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300">
               {language === 'en'
-                ? 'Full Stack Developer passionate about creating beautiful and functional web applications.'
-                : 'Full Stack Developer, який створює красиві та функціональні веб-додатки.'}
+                ? 'Frontend Developer passionate about creating beautiful and functional web applications.'
+                : 'Frontend Developer, який створює красиві та функціональні веб-додатки.'}
             </p>
           </div>
 
@@ -44,13 +34,7 @@ const Footer = memo(({ language, translations }) => {
                     onClick={() => {
                       const element = document.getElementById(section);
                       if (element) {
-                        const offset = section === 'home' ? 0 : 80;
-                        const elementPosition = element.getBoundingClientRect().top;
-                        const offsetPosition = elementPosition + window.pageYOffset - offset;
-                        window.scrollTo({
-                          top: offsetPosition,
-                          behavior: 'smooth',
-                        });
+                        element.scrollIntoView({ behavior: 'smooth' });
                       }
                     }}
                     className="text-sm sm:text-base text-gray-600 dark:text-gray-300 hover:text-blue-500 
@@ -77,9 +61,9 @@ const Footer = memo(({ language, translations }) => {
                   className="p-2.5 sm:p-3 rounded-full bg-gray-200 dark:bg-gray-600 hover:bg-blue-600 
                            dark:hover:bg-blue-600
                            hover:text-white text-gray-700 dark:text-gray-200 transition-colors duration-200"
-                  aria-label={social.name}
+                  aria-label={social.label}
                 >
-                  <social.IconComponent size={18} className="sm:w-5 sm:h-5" />
+                  <social.icon size={18} className="sm:w-5 sm:h-5" />
                 </a>
               ))}
             </div>
@@ -95,8 +79,6 @@ const Footer = memo(({ language, translations }) => {
       </div>
     </footer>
   );
-});
-
-Footer.displayName = 'Footer';
+};
 
 export default Footer;

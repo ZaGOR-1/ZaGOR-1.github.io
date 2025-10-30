@@ -1,13 +1,13 @@
-import { m as motion, useInView } from 'framer-motion';
-import { useRef, useMemo, memo } from 'react';
-import { Heart, Lightbulb, Users, Target } from './Icons';
+import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
+import { Heart, Lightbulb, Users, Target } from 'lucide-react';
 
-const About = memo(({ language, translations }) => {
+const About = ({ language, translations }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
-  const t = useMemo(() => translations[language], [translations, language]);
+  const t = translations[language];
 
-  const characteristics = useMemo(() => [
+  const characteristics = [
     {
       icon: Heart,
       title: t.about.characteristics.passionate.title,
@@ -28,7 +28,7 @@ const About = memo(({ language, translations }) => {
       title: t.about.characteristics.dedicated.title,
       description: t.about.characteristics.dedicated.description,
     },
-  ], [t]);
+  ];
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -80,8 +80,6 @@ const About = memo(({ language, translations }) => {
             <img
               src="/images/about.jpg"
               alt="About"
-              width="800"
-              height="600"
               className="rounded-2xl shadow-xl w-full"
               loading="lazy"
               onError={(e) => {
@@ -116,8 +114,6 @@ const About = memo(({ language, translations }) => {
       </motion.div>
     </section>
   );
-});
-
-About.displayName = 'About';
+};
 
 export default About;

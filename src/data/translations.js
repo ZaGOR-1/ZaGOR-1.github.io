@@ -6,6 +6,7 @@ export const translations = {
       skills: 'Навички',
       education: 'Освіта',
       experience: 'Досвід',
+      projects: 'Проекти',
       contact: 'Контакти',
       downloadCV: 'Завантажити резюме',
     },
@@ -34,7 +35,7 @@ export const translations = {
         },
         teamPlayer: {
           title: 'Командний гравець',
-          description: 'Добре працюю в команді та ціную співпрацю',
+          description: 'Добре працюю в команді та ціню співпрацю',
         },
         dedicated: {
           title: 'Відданий',
@@ -79,9 +80,11 @@ export const translations = {
         'React - Повний курс (Udemy)',
         'JavaScript алгоритми та структури даних (freeCodeCamp)',
         'Responsive Web Design (freeCodeCamp)',
-        'C - Вступ та просунутий рівень (Sololearn)',
-        'SQL - Вступ та середній рівень (Sololearn)',
-        'C# - Вступ (Sololearn)',
+        'Introduction to C (Sololearn)',
+        'C Intermediate (Sololearn)',
+        'Introduction to SQL (Sololearn)',
+        'SQL Intermediate (Sololearn)',
+        'Introduction to C# (Sololearn)',
       ],
     },
     experience: {
@@ -112,6 +115,10 @@ export const translations = {
           ],
         },
       ],
+    },
+    projects: {
+      title: 'Проекти',
+      subtitle: 'Мої останні роботи',
     },
     contact: {
       title: 'Контакти',
@@ -148,6 +155,7 @@ export const translations = {
       skills: 'Skills',
       education: 'Education',
       experience: 'Experience',
+      projects: 'Projects',
       contact: 'Contact',
       downloadCV: 'Download CV',
     },
@@ -221,9 +229,11 @@ export const translations = {
         'React - The Complete Guide (Udemy)',
         'JavaScript Algorithms and Data Structures (freeCodeCamp)',
         'Responsive Web Design (freeCodeCamp)',
-        'C - Introduction and Intermediate (Sololearn)',
-        'SQL - Introduction and Intermediate (Sololearn)',
-        'C# - Introduction (Sololearn)',
+        'Introduction to C (Sololearn)',
+        'C Intermediate (Sololearn)',
+        'Introduction to SQL (Sololearn)',
+        'SQL Intermediate (Sololearn)',
+        'Introduction to C# (Sololearn)',
       ],
     },
     experience: {
@@ -254,6 +264,10 @@ export const translations = {
           ],
         },
       ],
+    },
+    projects: {
+      title: 'Projects',
+      subtitle: 'My recent work',
     },
     contact: {
       title: 'Contact',
