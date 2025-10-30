@@ -80,6 +80,8 @@ const About = memo(({ language, translations }) => {
             <img
               src="/images/about.jpg"
               alt="About"
+              width="800"
+              height="600"
               className="rounded-2xl shadow-xl w-full"
               loading="lazy"
               onError={(e) => {

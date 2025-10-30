@@ -44,8 +44,11 @@
     <!-- Google Fonts - Inter with font-display swap for better performance -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     
+    <!-- Preload critical font for better performance -->
+    <link rel="preload" href="https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2" as="font" type="font/woff2" crossorigin />
+    
     <!-- Preload critical assets -->
-    <link rel="preload" href="/images/profile.jpg" as="image" type="image/jpeg" />
+    <link rel="preload" href="/images/profile.jpg" as="image" type="image/jpeg" fetchpriority="high" />
     
     <!-- Prevent FOUC (Flash of Unstyled Content) for dark mode -->
     <script>
