@@ -1,9 +1,9 @@
 import { motion, useInView } from 'framer-motion';
-import { useRef, useMemo } from 'react';
+import { useRef, useMemo, memo } from 'react';
 import { skillsData } from '../data/translations';
 import { staggerContainerVariants, fadeInVariants } from '../utils/animations';
 
-const Skills = ({ language, translations }) => {
+const Skills = memo(({ language, translations }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
   const t = translations[language];
@@ -94,6 +94,8 @@ const Skills = ({ language, translations }) => {
       </motion.div>
     </section>
   );
-};
+});
+
+Skills.displayName = 'Skills';
 
 export default Skills;

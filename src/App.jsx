@@ -31,9 +31,10 @@ function App() {
     }
   }, [darkMode]);
 
-  const progressStyle = useMemo(() => ({
-    scaleX: scrollProgress / 100
-  }), [scrollProgress]);
+  const progressTransform = useMemo(() => 
+    `scaleX(${scrollProgress / 100})`,
+    [scrollProgress]
+  );
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 
@@ -45,8 +46,9 @@ function App() {
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 z-[60] shadow-[0_2px_10px_rgba(102,126,234,0.5)]"
         style={{
-          ...progressStyle,
           background: 'linear-gradient(90deg, #667eea 0%, #764ba2 50%, #f093fb 100%)',
+          transform: progressTransform,
+          transformOrigin: 'left',
         }}
         initial={{ scaleX: 0 }}
         transition={{ duration: 0.1, ease: 'easeOut' }}

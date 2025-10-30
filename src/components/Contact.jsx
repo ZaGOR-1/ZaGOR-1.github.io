@@ -1,11 +1,11 @@
 import { motion, useInView } from 'framer-motion';
-import { useRef, useState, useCallback, useMemo } from 'react';
+import { useRef, useState, useCallback, useMemo, memo } from 'react';
 import { Mail, MapPin, Phone, Send } from 'lucide-react';
 import { validateFormData } from '../utils/validation';
 import { FORM_SUCCESS_MESSAGE_DURATION, FORM_SUBMIT_DELAY } from '../utils/constants';
 import { staggerContainerVariants, fadeInVariants } from '../utils/animations';
 
-const Contact = ({ language, translations }) => {
+const Contact = memo(({ language, translations }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
   const t = translations[language];
@@ -195,6 +195,8 @@ const Contact = ({ language, translations }) => {
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   className="text-green-600 dark:text-green-400 text-center font-semibold"
+                  role="alert"
+                  aria-live="polite"
                 >
                   {t.contact.form.success}
                 </motion.p>
@@ -205,6 +207,8 @@ const Contact = ({ language, translations }) => {
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   className="text-red-600 dark:text-red-400 text-center font-semibold"
+                  role="alert"
+                  aria-live="assertive"
                 >
                   {t.contact.form.error}
                 </motion.p>
@@ -215,6 +219,8 @@ const Contact = ({ language, translations }) => {
       </motion.div>
     </section>
   );
-};
+});
+
+Contact.displayName = 'Contact';
 
 export default Contact;

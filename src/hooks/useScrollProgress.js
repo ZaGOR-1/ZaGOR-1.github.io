@@ -1,42 +1,40 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { SCROLL_THROTTLE_DELAY, HEADER_OFFSET, HOME_HEADER_OFFSET } from '../utils/constants';
-
-const throttle = (func, delay) => {
-  let timeoutId;
-  let lastRan;
-  return function(...args) {
-    if (!lastRan) {
-      func.apply(this, args);
-      lastRan = Date.now();
-    } else {
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => {
-        if (Date.now() - lastRan >= delay) {
-          func.apply(this, args);
-          lastRan = Date.now();
-        }
-      }, delay - (Date.now() - lastRan));
-    }
-  };
-};
 
 export const useScrollProgress = () => {
   const [progress, setProgress] = useState(0);
 
-  useEffect(() => {
-    const updateProgress = () => {
-      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-      if (scrollHeight <= 0) {
-        setProgress(0);
-        return;
+  const updateProgress = useCallback(() => {
+    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+    if (scrollHeight <= 0) {
+      setProgress(0);
+      return;
+    }
+    const scrolled = Math.min(100, Math.max(0, (window.scrollY / scrollHeight) * 100));
+    setProgress(scrolled);
+  }, []);
+
+  const throttledUpdate = useMemo(() => {
+    let timeoutId;
+    let lastRan;
+    return () => {
+      if (!lastRan) {
+        updateProgress();
+        lastRan = Date.now();
+      } else {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+          if (Date.now() - lastRan >= SCROLL_THROTTLE_DELAY) {
+            updateProgress();
+            lastRan = Date.now();
+          }
+        }, SCROLL_THROTTLE_DELAY - (Date.now() - lastRan));
       }
-      const scrolled = Math.min(100, Math.max(0, (window.scrollY / scrollHeight) * 100));
-      setProgress(scrolled);
     };
+  }, [updateProgress]);
 
+  useEffect(() => {
     updateProgress();
-
-    const throttledUpdate = throttle(updateProgress, SCROLL_THROTTLE_DELAY);
 
     window.addEventListener('scroll', throttledUpdate, { passive: true });
     window.addEventListener('resize', throttledUpdate, { passive: true });
@@ -45,7 +43,7 @@ export const useScrollProgress = () => {
       window.removeEventListener('scroll', throttledUpdate);
       window.removeEventListener('resize', throttledUpdate);
     };
-  }, []);
+  }, [updateProgress, throttledUpdate]);
 
   return progress;
 };

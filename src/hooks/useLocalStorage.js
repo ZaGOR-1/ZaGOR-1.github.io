@@ -16,16 +16,19 @@ export const useLocalStorage = (key, initialValue) => {
 
   const setValue = useCallback((value) => {
     try {
-      const valueToStore = value instanceof Function ? value(storedValue) : value;
-      setStoredValue(valueToStore);
-      
-      if (typeof window !== 'undefined') {
-        window.localStorage.setItem(key, JSON.stringify(valueToStore));
-      }
+      setStoredValue((prevValue) => {
+        const valueToStore = value instanceof Function ? value(prevValue) : value;
+        
+        if (typeof window !== 'undefined') {
+          window.localStorage.setItem(key, JSON.stringify(valueToStore));
+        }
+        
+        return valueToStore;
+      });
     } catch {
       // Silently fail in production
     }
-  }, [key, storedValue]);
+  }, [key]);
 
   return [storedValue, setValue];
 };

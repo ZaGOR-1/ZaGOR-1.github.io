@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useScrollToSection } from '../hooks/useScrollProgress';
 import { HEADER_SCROLL_THRESHOLD } from '../utils/constants';
 
-const Header = ({ language, setLanguage, darkMode, setDarkMode, translations }) => {
+const Header = memo(({ language, setLanguage, darkMode, setDarkMode, translations }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const scrollToSection = useScrollToSection();
@@ -188,6 +188,8 @@ const Header = ({ language, setLanguage, darkMode, setDarkMode, translations }) 
       </nav>
     </header>
   );
-};
+});
+
+Header.displayName = 'Header';
 
 export default Header;
