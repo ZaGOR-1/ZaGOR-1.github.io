@@ -1,11 +1,11 @@
 import { m as motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useMemo, memo } from 'react';
 import { GraduationCap, Award, BookOpen } from './Icons';
 
-const Education = ({ language, translations }) => {
+const Education = memo(({ language, translations }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
-  const t = translations[language];
+  const t = useMemo(() => translations[language], [translations, language]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -104,6 +104,8 @@ const Education = ({ language, translations }) => {
       </motion.div>
     </section>
   );
-};
+});
+
+Education.displayName = 'Education';
 
 export default Education;

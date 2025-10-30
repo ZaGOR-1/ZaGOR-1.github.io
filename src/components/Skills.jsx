@@ -1,12 +1,12 @@
 import { m as motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useMemo, memo } from 'react';
 import { skillsData } from '../data/translations';
 import { ANIMATION_CONFIG } from '../config/constants';
 
-const Skills = ({ language, translations }) => {
+const Skills = memo(({ language, translations }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
-  const t = translations[language];
+  const t = useMemo(() => translations[language], [translations, language]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -109,6 +109,8 @@ const Skills = ({ language, translations }) => {
       </motion.div>
     </section>
   );
-};
+});
+
+Skills.displayName = 'Skills';
 
 export default Skills;

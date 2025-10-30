@@ -1,15 +1,15 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo, useCallback, memo } from 'react';
 import { Menu, X, Download, Sun, Moon, Globe } from './Icons';
 import { m as motion, AnimatePresence } from 'framer-motion';
 import { useScrollToSection } from '../hooks/useScrollProgress';
 
-const Header = ({ language, setLanguage, darkMode, setDarkMode, translations }) => {
+const Header = memo(({ language, setLanguage, darkMode, setDarkMode, translations }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const menuRef = useRef(null);
   const scrollToSection = useScrollToSection();
 
-  const t = translations[language];
+  const t = useMemo(() => translations[language], [translations, language]);
 
   useEffect(() => {
     let timeoutId;
@@ -48,27 +48,27 @@ const Header = ({ language, setLanguage, darkMode, setDarkMode, translations }) 
     };
   }, [isMenuOpen]);
 
-  const toggleLanguage = () => {
+  const toggleLanguage = useCallback(() => {
     setLanguage(language === 'en' ? 'uk' : 'en');
-  };
+  }, [language, setLanguage]);
 
-  const toggleTheme = () => {
+  const toggleTheme = useCallback(() => {
     setDarkMode(!darkMode);
-  };
+  }, [darkMode, setDarkMode]);
 
-  const handleNavClick = (id) => {
+  const handleNavClick = useCallback((id) => {
     scrollToSection(id);
     setIsMenuOpen(false);
-  };
+  }, [scrollToSection]);
 
-  const navItems = [
+  const navItems = useMemo(() => [
     { id: 'home', label: t.nav.home },
     { id: 'about', label: t.nav.about },
     { id: 'skills', label: t.nav.skills },
     { id: 'education', label: t.nav.education },
     { id: 'experience', label: t.nav.experience },
     { id: 'contact', label: t.nav.contact },
-  ];
+  ], [t]);
 
   return (
     <header
@@ -222,6 +222,8 @@ const Header = ({ language, setLanguage, darkMode, setDarkMode, translations }) 
       </nav>
     </header>
   );
-};
+});
+
+Header.displayName = 'Header';
 
 export default Header;
