@@ -1,9 +1,9 @@
 import { motion, useInView } from 'framer-motion';
-import { useRef, useState, useMemo, useCallback } from 'react';
+import { useRef, useState, useMemo, useCallback, memo } from 'react';
 import { ExternalLink, Github, Filter } from 'lucide-react';
 import { fadeInUpVariants, staggerContainerVariants } from '../utils/animations';
 
-const Projects = ({ language, translations }) => {
+const Projects = memo(({ language, translations }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
   const t = translations[language];
@@ -229,6 +229,8 @@ const Projects = ({ language, translations }) => {
       </motion.div>
     </section>
   );
-};
+});
+
+Projects.displayName = 'Projects';
 
 export default Projects;

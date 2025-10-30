@@ -1,9 +1,9 @@
 import { motion, useInView } from 'framer-motion';
-import { useRef, useMemo } from 'react';
+import { useRef, useMemo, memo } from 'react';
 import { Heart, Lightbulb, Users, Target } from 'lucide-react';
 import { staggerContainerVariants, fadeInVariants } from '../utils/animations';
 
-const About = ({ language, translations }) => {
+const About = memo(({ language, translations }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
   const t = translations[language];
@@ -115,6 +115,8 @@ const About = ({ language, translations }) => {
       </motion.div>
     </section>
   );
-};
+});
+
+About.displayName = 'About';
 
 export default About;

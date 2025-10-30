@@ -4,19 +4,18 @@ import { Download, Mail, Github, Linkedin, Send } from 'lucide-react';
 import { useScrollToSection } from '../hooks/useScrollProgress';
 import { staggerContainerVariants, fadeInVariants } from '../utils/animations';
 
+const SOCIAL_LINKS = [
+  { icon: Github, url: 'https://github.com', label: 'GitHub' },
+  { icon: Linkedin, url: 'https://linkedin.com', label: 'LinkedIn' },
+  { icon: Send, url: 'https://t.me/', label: 'Telegram' },
+  { icon: Mail, url: 'mailto:denys.zahorovskyi@example.com', label: 'Email' },
+];
+
 const Hero = ({ language, translations }) => {
   const scrollToSection = useScrollToSection();
   const t = translations[language];
 
   const containerVariants = useMemo(() => staggerContainerVariants(), []);
-  const itemVariants = useMemo(() => fadeInVariants, []);
-
-  const socialLinks = useMemo(() => [
-    { icon: Github, url: 'https://github.com', label: 'GitHub' },
-    { icon: Linkedin, url: 'https://linkedin.com', label: 'LinkedIn' },
-    { icon: Send, url: 'https://t.me/', label: 'Telegram' },
-    { icon: Mail, url: 'mailto:denys.zahorovskyi@example.com', label: 'Email' },
-  ], []);
 
   const handleContactClick = useCallback(() => {
     scrollToSection('contact');
@@ -40,16 +39,16 @@ const Hero = ({ language, translations }) => {
         className="container-custom mx-auto px-4 sm:px-6 relative z-10"
       >
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8 sm:gap-12">
-          <motion.div variants={itemVariants} className="flex-1 text-center lg:text-left w-full lg:w-auto">
+          <motion.div variants={fadeInVariants} className="flex-1 text-center lg:text-left w-full lg:w-auto">
             <motion.p
-              variants={itemVariants}
+              variants={fadeInVariants}
               className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-2 animate-fade-in-up"
             >
               {t.hero.greeting}
             </motion.p>
 
             <motion.h1
-              variants={itemVariants}
+              variants={fadeInVariants}
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 animate-fade-in-up"
               style={{ animationDelay: '0.1s' }}
             >
@@ -57,7 +56,7 @@ const Hero = ({ language, translations }) => {
             </motion.h1>
 
             <motion.div
-              variants={itemVariants}
+              variants={fadeInVariants}
               className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold mb-6 animate-fade-in-up"
               style={{ animationDelay: '0.2s' }}
             >
@@ -67,7 +66,7 @@ const Hero = ({ language, translations }) => {
             </motion.div>
 
             <motion.p
-              variants={itemVariants}
+              variants={fadeInVariants}
               className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto lg:mx-0 animate-fade-in-up"
               style={{ animationDelay: '0.3s' }}
             >
@@ -75,7 +74,7 @@ const Hero = ({ language, translations }) => {
             </motion.p>
 
             <motion.div
-              variants={itemVariants}
+              variants={fadeInVariants}
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8 animate-fade-in-up"
               style={{ animationDelay: '0.4s' }}
             >
@@ -98,11 +97,11 @@ const Hero = ({ language, translations }) => {
             </motion.div>
 
             <motion.div
-              variants={itemVariants}
+              variants={fadeInVariants}
               className="flex gap-3 sm:gap-4 justify-center lg:justify-start flex-wrap animate-fade-in-up"
               style={{ animationDelay: '0.5s' }}
             >
-              {socialLinks.map((social, index) => (
+              {SOCIAL_LINKS.map((social, index) => (
                 <motion.a
                   key={index}
                   href={social.url}
@@ -123,7 +122,7 @@ const Hero = ({ language, translations }) => {
           </motion.div>
 
           <motion.div
-            variants={itemVariants}
+            variants={fadeInVariants}
             className="flex-1 flex justify-center w-full lg:w-auto"
           >
             <motion.div 

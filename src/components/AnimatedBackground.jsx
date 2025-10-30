@@ -21,6 +21,7 @@ const AnimatedBackground = ({ darkMode }) => {
     const ctx = canvas.getContext('2d', { alpha: true });
     let width = window.innerWidth;
     let height = window.innerHeight;
+    let isTabActive = true;
 
     const setCanvasSize = () => {
       width = window.innerWidth;
@@ -121,6 +122,11 @@ const AnimatedBackground = ({ darkMode }) => {
     };
 
     const animate = () => {
+      if (!isTabActive) {
+        animationIdRef.current = requestAnimationFrame(animate);
+        return;
+      }
+
       ctx.clearRect(0, 0, width, height);
 
       particlesRef.current.forEach(particle => {
@@ -145,8 +151,13 @@ const AnimatedBackground = ({ darkMode }) => {
       initParticles();
     };
 
+    const handleVisibilityChange = () => {
+      isTabActive = !document.hidden;
+    };
+
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
     window.addEventListener('resize', handleResize, { passive: true });
+    document.addEventListener('visibilitychange', handleVisibilityChange);
 
     initParticles();
     animate();
@@ -154,6 +165,7 @@ const AnimatedBackground = ({ darkMode }) => {
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('resize', handleResize);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
       if (animationIdRef.current) {
         cancelAnimationFrame(animationIdRef.current);
       }
