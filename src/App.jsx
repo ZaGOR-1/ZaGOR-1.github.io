@@ -29,6 +29,10 @@ function App() {
     }
   }, [darkMode]);
 
+  useEffect(() => {
+    document.documentElement.lang = language;
+  }, [language]);
+
   return (
     <MotionConfig>
       <div className="min-h-screen bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-50 

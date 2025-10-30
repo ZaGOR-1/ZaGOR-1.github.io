@@ -132,9 +132,11 @@ const Hero = memo(({ language, translations }) => {
               <img
                 src="/images/profile.jpg"
                 alt={t.hero.name}
+                width="400"
+                height="400"
                 className="w-full h-full object-cover"
                 loading="eager"
-                fetchpriority="high"
+                fetchPriority="high"
                 onError={(e) => {
                   e.target.src = 'https://ui-avatars.com/api/?name=Denys+Zahorovskyi&size=400&background=3b82f6&color=fff&bold=true';
                 }}
