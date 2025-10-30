@@ -1,4 +1,4 @@
-import { useEffect, lazy, Suspense } from 'react';
+import { useEffect, lazy, Suspense, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import Header from './components/Header';
 import Hero from './components/Hero';
@@ -22,12 +22,17 @@ function App() {
   const scrollProgress = useScrollProgress();
 
   useEffect(() => {
+    const root = document.documentElement;
     if (darkMode) {
-      document.documentElement.classList.add('dark');
+      root.classList.add('dark');
     } else {
-      document.documentElement.classList.remove('dark');
+      root.classList.remove('dark');
     }
   }, [darkMode]);
+
+  const progressStyle = useMemo(() => ({
+    scaleX: scrollProgress / 100
+  }), [scrollProgress]);
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-50 
@@ -36,7 +41,7 @@ function App() {
         className="fixed top-0 left-0 right-0 h-2 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 
                    dark:from-blue-400 dark:via-purple-400 dark:to-pink-400
                    transform origin-left z-[60] shadow-[0_2px_10px_rgba(59,130,246,0.5)]"
-        style={{ scaleX: scrollProgress / 100 }}
+        style={progressStyle}
         initial={{ scaleX: 0 }}
         transition={{ duration: 0.1, ease: 'easeOut' }}
       />

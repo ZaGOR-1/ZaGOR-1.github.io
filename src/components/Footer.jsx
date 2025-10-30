@@ -1,14 +1,23 @@
+import { useMemo, useCallback } from 'react';
 import { Heart, Github, Linkedin, Send, Mail } from 'lucide-react';
+import { useScrollToSection } from '../hooks/useScrollProgress';
 
 const Footer = ({ language, translations }) => {
   const t = translations[language];
+  const scrollToSection = useScrollToSection();
 
-  const socialLinks = [
+  const socialLinks = useMemo(() => [
     { icon: Github, url: 'https://github.com', label: 'GitHub' },
     { icon: Linkedin, url: 'https://linkedin.com', label: 'LinkedIn' },
     { icon: Send, url: 'https://t.me/', label: 'Telegram' },
     { icon: Mail, url: 'mailto:denys.zahorovskyi@example.com', label: 'Email' },
-  ];
+  ], []);
+
+  const handleNavClick = useCallback((section) => {
+    scrollToSection(section);
+  }, [scrollToSection]);
+
+  const currentYear = useMemo(() => new Date().getFullYear(), []);
 
   return (
     <footer className="bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
@@ -31,12 +40,7 @@ const Footer = ({ language, translations }) => {
               {['home', 'about', 'skills', 'contact'].map((section) => (
                 <li key={section}>
                   <button
-                    onClick={() => {
-                      const element = document.getElementById(section);
-                      if (element) {
-                        element.scrollIntoView({ behavior: 'smooth' });
-                      }
-                    }}
+                    onClick={() => handleNavClick(section)}
                     className="text-sm sm:text-base text-gray-600 dark:text-gray-300 hover:text-blue-500 
                              dark:hover:text-blue-400 transition-colors"
                   >
@@ -72,7 +76,7 @@ const Footer = ({ language, translations }) => {
 
         <div className="border-t border-gray-200 dark:border-gray-700 pt-6 sm:pt-8 text-center">
           <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 flex items-center justify-center gap-2 flex-wrap">
-            © {new Date().getFullYear()} {t.footer.by}. {t.footer.rights} {t.footer.madeWith}{' '}
+            © {currentYear} {t.footer.by}. {t.footer.rights} {t.footer.madeWith}{' '}
             <Heart size={16} className="text-red-500" /> {language === 'en' ? 'and' : 'та'} React
           </p>
         </div>

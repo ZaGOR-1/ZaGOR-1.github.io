@@ -1,6 +1,7 @@
 import { motion, useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useRef, useState, useMemo, useCallback } from 'react';
 import { ExternalLink, Github, Filter } from 'lucide-react';
+import { fadeInUpVariants, staggerContainerVariants } from '../utils/animations';
 
 const Projects = ({ language, translations }) => {
   const ref = useRef(null);
@@ -83,37 +84,26 @@ const Projects = ({ language, translations }) => {
     },
   ];
 
-  const filters = [
+  const filters = useMemo(() => [
     { id: 'all', label: language === 'en' ? 'All' : 'Всі' },
     { id: 'frontend', label: 'Frontend' },
     { id: 'backend', label: 'Backend' },
     { id: 'fullstack', label: 'Full Stack' },
-  ];
+  ], [language]);
 
-  const filteredProjects = activeFilter === 'all' 
-    ? projects 
-    : projects.filter(project => project.category === activeFilter);
+  const filteredProjects = useMemo(() => 
+    activeFilter === 'all' 
+      ? projects 
+      : projects.filter(project => project.category === activeFilter),
+    [activeFilter, projects]
+  );
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
+  const handleFilterChange = useCallback((filterId) => {
+    setActiveFilter(filterId);
+  }, []);
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-      },
-    },
-  };
+  const containerVariants = useMemo(() => staggerContainerVariants(), []);
+  const itemVariants = useMemo(() => fadeInUpVariants, []);
 
   return (
     <section id="projects" className="section-padding bg-gray-50 dark:bg-gray-800/50" ref={ref}>
@@ -135,7 +125,7 @@ const Projects = ({ language, translations }) => {
           {filters.map((filter) => (
             <button
               key={filter.id}
-              onClick={() => setActiveFilter(filter.id)}
+              onClick={() => handleFilterChange(filter.id)}
               className={`px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold transition-all duration-200 text-sm sm:text-base
                 ${activeFilter === filter.id
                   ? 'bg-blue-600 text-white shadow-lg scale-105'
@@ -162,8 +152,11 @@ const Projects = ({ language, translations }) => {
                 <img
                   src={project.image}
                   alt={project.title}
+                  width="800"
+                  height="600"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   loading="lazy"
+                  decoding="async"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent 
                               opacity-0 group-hover:opacity-100 transition-opacity duration-300 

@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo, useCallback, memo } from 'react';
 import { Menu, X, Download, Sun, Moon, Globe } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useScrollToSection } from '../hooks/useScrollProgress';
+import { HEADER_SCROLL_THRESHOLD } from '../utils/constants';
 
 const Header = ({ language, setLanguage, darkMode, setDarkMode, translations }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,7 +16,7 @@ const Header = ({ language, setLanguage, darkMode, setDarkMode, translations }) 
     const handleScroll = () => {
       clearTimeout(timeoutId);
       timeoutId = setTimeout(() => {
-        setIsScrolled(window.scrollY > 50);
+        setIsScrolled(window.scrollY > HEADER_SCROLL_THRESHOLD);
       }, 10);
     };
 
@@ -26,27 +27,27 @@ const Header = ({ language, setLanguage, darkMode, setDarkMode, translations }) 
     };
   }, []);
 
-  const toggleLanguage = () => {
+  const toggleLanguage = useCallback(() => {
     setLanguage(language === 'en' ? 'uk' : 'en');
-  };
+  }, [language, setLanguage]);
 
-  const toggleTheme = () => {
+  const toggleTheme = useCallback(() => {
     setDarkMode(!darkMode);
-  };
+  }, [darkMode, setDarkMode]);
 
-  const handleNavClick = (id) => {
+  const handleNavClick = useCallback((id) => {
     scrollToSection(id);
     setIsMenuOpen(false);
-  };
+  }, [scrollToSection]);
 
-  const navItems = [
+  const navItems = useMemo(() => [
     { id: 'home', label: t.nav.home },
     { id: 'about', label: t.nav.about },
     { id: 'skills', label: t.nav.skills },
     { id: 'education', label: t.nav.education },
     { id: 'experience', label: t.nav.experience },
     { id: 'contact', label: t.nav.contact },
-  ];
+  ], [t]);
 
   return (
     <header

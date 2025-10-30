@@ -1,37 +1,26 @@
 import { motion } from 'framer-motion';
+import { useMemo, useCallback } from 'react';
 import { Download, Mail, Github, Linkedin, Send } from 'lucide-react';
 import { useScrollToSection } from '../hooks/useScrollProgress';
+import { staggerContainerVariants, fadeInVariants } from '../utils/animations';
 
 const Hero = ({ language, translations }) => {
   const scrollToSection = useScrollToSection();
   const t = translations[language];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
+  const containerVariants = useMemo(() => staggerContainerVariants(), []);
+  const itemVariants = useMemo(() => fadeInVariants, []);
 
-  const itemVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        duration: 0.3,
-      },
-    },
-  };
-
-  const socialLinks = [
+  const socialLinks = useMemo(() => [
     { icon: Github, url: 'https://github.com', label: 'GitHub' },
     { icon: Linkedin, url: 'https://linkedin.com', label: 'LinkedIn' },
     { icon: Send, url: 'https://t.me/', label: 'Telegram' },
     { icon: Mail, url: 'mailto:denys.zahorovskyi@example.com', label: 'Email' },
-  ];
+  ], []);
+
+  const handleContactClick = useCallback(() => {
+    scrollToSection('contact');
+  }, [scrollToSection]);
 
   return (
     <section
@@ -90,7 +79,7 @@ const Hero = ({ language, translations }) => {
               </a>
 
               <button
-                onClick={() => scrollToSection('contact')}
+                onClick={handleContactClick}
                 className="btn-secondary flex items-center justify-center space-x-2"
               >
                 <Mail size={20} />
@@ -127,9 +116,12 @@ const Hero = ({ language, translations }) => {
               <img
                 src="/images/profile.jpg"
                 alt={t.hero.name}
+                width="384"
+                height="384"
                 className="w-full h-full object-cover"
                 loading="eager"
                 fetchpriority="high"
+                decoding="async"
                 onError={(e) => {
                   e.target.src = 'https://ui-avatars.com/api/?name=Denys+Zahorovskyi&size=400&background=3b82f6&color=fff&bold=true';
                 }}
