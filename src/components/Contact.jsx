@@ -1,6 +1,6 @@
-import { motion, useInView } from 'framer-motion';
+import { m as motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
-import { Mail, MapPin, Phone, Send } from 'lucide-react';
+import { Mail, MapPin, Phone, Send } from './Icons';
 import { CONTACT_INFO } from '../config/constants';
 
 const Contact = ({ language, translations }) => {

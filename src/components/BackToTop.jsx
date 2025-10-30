@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowUp } from 'lucide-react';
+import { m as motion, AnimatePresence } from 'framer-motion';
+import { ArrowUp } from './Icons';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 
 const BackToTop = () => {

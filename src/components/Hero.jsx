@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
-import { Download, Mail, Github, Linkedin, Send, Mail as MailIcon } from 'lucide-react';
+import { m as motion } from 'framer-motion';
+import { Download, Mail, Github, Linkedin, Send } from './Icons';
 import { useScrollToSection } from '../hooks/useScrollProgress';
 import { SOCIAL_LINKS } from '../config/constants';
 
@@ -28,13 +28,8 @@ const Hero = ({ language, translations }) => {
   };
 
   const getIconComponent = (iconName) => {
-    const icons = {
-      Github,
-      Linkedin,
-      Send,
-      Mail: MailIcon,
-    };
-    return icons[iconName] || MailIcon;
+    const icons = { Github, Linkedin, Send, Mail };
+    return icons[iconName] || Mail;
   };
 
   const socialLinks = SOCIAL_LINKS.map(link => ({

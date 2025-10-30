@@ -1,4 +1,4 @@
-import { Heart, Github, Linkedin, Send, Mail } from 'lucide-react';
+import { Heart, Github, Linkedin, Send, Mail } from './Icons';
 import { SOCIAL_LINKS } from '../config/constants';
 
 const Footer = ({ language, translations }) => {

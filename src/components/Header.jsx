@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
-import { Menu, X, Download, Sun, Moon, Globe } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X, Download, Sun, Moon, Globe } from './Icons';
+import { m as motion, AnimatePresence } from 'framer-motion';
 import { useScrollToSection } from '../hooks/useScrollProgress';
 
 const Header = ({ language, setLanguage, darkMode, setDarkMode, translations }) => {
