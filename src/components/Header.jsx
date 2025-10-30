@@ -51,54 +51,66 @@ const Header = ({ language, setLanguage, darkMode, setDarkMode, translations }) 
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm shadow-md dark:border-b dark:border-gray-600'
+          ? 'glass-effect shadow-lg'
           : 'bg-transparent'
       }`}
       role="banner"
     >
       <nav className="container-custom mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4" role="navigation" aria-label="Main navigation">
         <div className="flex items-center justify-between">
-          <div
+          <motion.div
             className="text-xl sm:text-2xl font-bold gradient-text cursor-pointer"
             onClick={() => handleNavClick('home')}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
           >
             DZ
-          </div>
+          </motion.div>
 
           <div className="hidden lg:flex items-center space-x-4 xl:space-x-8">
             {navItems.map((item) => (
-              <button
+              <motion.button
                 key={item.id}
                 onClick={() => handleNavClick(item.id)}
-                className="text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 
-                         transition-colors duration-200 font-medium text-sm xl:text-base"
+                className="text-gray-700 dark:text-gray-200 font-medium text-sm xl:text-base relative group"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
                 {item.label}
-              </button>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-600 to-blue-600 
+                               group-hover:w-full transition-all duration-300"></span>
+              </motion.button>
             ))}
           </div>
 
           <div className="hidden lg:flex items-center space-x-2 xl:space-x-4">
-            <button
+            <motion.button
               onClick={toggleTheme}
-              className="p-2 rounded-lg bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 
-                       dark:hover:bg-gray-500 transition-colors duration-200"
+              className="p-2 rounded-xl bg-gradient-to-br from-purple-50 to-blue-50 dark:from-gray-700 dark:to-gray-600 
+                       hover:from-purple-100 hover:to-blue-100 dark:hover:from-gray-600 dark:hover:to-gray-500
+                       transition-all duration-300 shadow-md hover:shadow-lg"
               aria-label="Toggle theme"
+              whileHover={{ scale: 1.1, rotate: 180 }}
+              whileTap={{ scale: 0.9 }}
+              transition={{ type: "spring", stiffness: 260, damping: 20 }}
             >
-              {darkMode ? <Sun size={20} className="text-gray-200" /> : <Moon size={20} />}
-            </button>
+              {darkMode ? <Sun size={20} className="text-yellow-400" /> : <Moon size={20} className="text-purple-600" />}
+            </motion.button>
 
-            <button
+            <motion.button
               onClick={toggleLanguage}
-              className="p-2 rounded-lg bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 
-                       dark:hover:bg-gray-500 transition-colors duration-200 flex items-center space-x-1"
+              className="p-2 rounded-xl bg-gradient-to-br from-purple-50 to-blue-50 dark:from-gray-700 dark:to-gray-600 
+                       hover:from-purple-100 hover:to-blue-100 dark:hover:from-gray-600 dark:hover:to-gray-500
+                       transition-all duration-300 flex items-center space-x-1 shadow-md hover:shadow-lg"
               aria-label="Toggle language"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <Globe size={20} className="text-gray-700 dark:text-gray-200" />
-              <span className="text-sm font-medium text-gray-700 dark:text-gray-200">{language.toUpperCase()}</span>
-            </button>
+              <Globe size={20} className="text-purple-600 dark:text-purple-400" />
+              <span className="text-sm font-medium text-purple-600 dark:text-purple-400">{language.toUpperCase()}</span>
+            </motion.button>
 
             <a
               href="/resume.pdf"

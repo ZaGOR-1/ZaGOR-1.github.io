@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Hero from './components/Hero';
 import BackToTop from './components/BackToTop';
 import LoadingSpinner from './components/LoadingSpinner';
+import AnimatedBackground from './components/AnimatedBackground';
 import { translations } from './data/translations';
 import { useScrollProgress } from './hooks/useScrollProgress';
 import { useLocalStorage } from './hooks/useLocalStorage';
@@ -35,13 +36,18 @@ function App() {
   }), [scrollProgress]);
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-50 
-                    transition-colors duration-200 relative overflow-x-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 
+                    dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 
+                    text-gray-900 dark:text-gray-50 
+                    transition-colors duration-500 relative overflow-x-hidden">
+      <AnimatedBackground darkMode={darkMode} />
+      
       <motion.div
-        className="fixed top-0 left-0 right-0 h-2 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 
-                   dark:from-blue-400 dark:via-purple-400 dark:to-pink-400
-                   transform origin-left z-[60] shadow-[0_2px_10px_rgba(59,130,246,0.5)]"
-        style={progressStyle}
+        className="fixed top-0 left-0 right-0 h-1 z-[60] shadow-[0_2px_10px_rgba(102,126,234,0.5)]"
+        style={{
+          ...progressStyle,
+          background: 'linear-gradient(90deg, #667eea 0%, #764ba2 50%, #f093fb 100%)',
+        }}
         initial={{ scaleX: 0 }}
         transition={{ duration: 0.1, ease: 'easeOut' }}
       />
@@ -54,7 +60,7 @@ function App() {
         translations={translations}
       />
 
-      <main id="main">
+      <main id="main" className="relative z-10">
         <Hero language={language} translations={translations} />
         <Suspense fallback={<LoadingSpinner />}>
           <About language={language} translations={translations} />
