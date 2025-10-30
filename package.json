@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "check": "node check-setup.js",
     "generate-resume": "node generate-resume.cjs",
-    "update-sitemap": "node update-sitemap.js"
+    "update-sitemap": "node update-sitemap.js",
+    "update-cache": "node update-cache-version.js"
   },
   "repository": {
     "type": "git",

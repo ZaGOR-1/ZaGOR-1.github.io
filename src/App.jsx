@@ -1,4 +1,4 @@
-import { useEffect, lazy, Suspense, useMemo } from 'react';
+import { useEffect, lazy, Suspense, useMemo, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import Header from './components/Header';
 import Hero from './components/Hero';
@@ -36,6 +36,14 @@ function App() {
     [scrollProgress]
   );
 
+  const handleSetLanguage = useCallback((newLanguage) => {
+    setLanguage(newLanguage);
+  }, [setLanguage]);
+
+  const handleSetDarkMode = useCallback((newDarkMode) => {
+    setDarkMode(newDarkMode);
+  }, [setDarkMode]);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 
                     dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 
@@ -56,9 +64,9 @@ function App() {
 
       <Header
         language={language}
-        setLanguage={setLanguage}
+        setLanguage={handleSetLanguage}
         darkMode={darkMode}
-        setDarkMode={setDarkMode}
+        setDarkMode={handleSetDarkMode}
         translations={translations}
       />
 

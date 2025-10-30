@@ -7,10 +7,26 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: {
-          'react-vendor': ['react', 'react-dom'],
-          'framer-motion': ['framer-motion'],
-          'lucide': ['lucide-react'],
+        manualChunks: (id) => {
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('react-dom')) {
+              return 'react-vendor';
+            }
+            if (id.includes('framer-motion')) {
+              return 'framer-motion';
+            }
+            if (id.includes('lucide-react')) {
+              return 'lucide';
+            }
+            return 'vendor';
+          }
+          if (id.includes('/components/')) {
+            const componentName = id.split('/components/')[1].split('.')[0];
+            if (['Header', 'Hero', 'BackToTop', 'LoadingSpinner', 'AnimatedBackground'].includes(componentName)) {
+              return 'core';
+            }
+            return 'components';
+          }
         },
         assetFileNames: (assetInfo) => {
           const info = assetInfo.name.split('.');
@@ -34,6 +50,10 @@ export default defineConfig({
     cssCodeSplit: true,
     sourcemap: false,
     reportCompressedSize: false,
+    assetsInlineLimit: 4096,
+    modulePreload: {
+      polyfill: true,
+    },
   },
   optimizeDeps: {
     include: ['react', 'react-dom', 'framer-motion', 'lucide-react'],
@@ -47,5 +67,8 @@ export default defineConfig({
     port: 3000,
     strictPort: false,
     host: true,
+    headers: {
+      'Cache-Control': 'no-cache',
+    },
   },
 })
