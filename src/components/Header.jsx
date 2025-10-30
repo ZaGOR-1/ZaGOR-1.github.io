@@ -1,15 +1,15 @@
 import { useState, useEffect, useMemo, useCallback, memo } from 'react';
 import { Menu, X, Download, Sun, Moon, Globe } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { useScrollToSection } from '../hooks/useScrollProgress';
 import { HEADER_SCROLL_THRESHOLD } from '../utils/constants';
 
-const Header = memo(({ language, setLanguage, darkMode, setDarkMode, translations }) => {
+const Header = memo(({ darkMode, setDarkMode }) => {
+  const { t, i18n } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const scrollToSection = useScrollToSection();
-
-  const t = translations[language];
 
   useEffect(() => {
     let timeoutId;
@@ -28,8 +28,10 @@ const Header = memo(({ language, setLanguage, darkMode, setDarkMode, translation
   }, []);
 
   const toggleLanguage = useCallback(() => {
-    setLanguage(language === 'en' ? 'uk' : 'en');
-  }, [language, setLanguage]);
+    const newLang = i18n.language === 'en' ? 'uk' : 'en';
+    i18n.changeLanguage(newLang);
+    localStorage.setItem('language', newLang);
+  }, [i18n]);
 
   const toggleTheme = useCallback(() => {
     setDarkMode(!darkMode);
@@ -109,7 +111,7 @@ const Header = memo(({ language, setLanguage, darkMode, setDarkMode, translation
               whileTap={{ scale: 0.95 }}
             >
               <Globe size={20} className="text-purple-600 dark:text-purple-400" />
-              <span className="text-sm font-medium text-purple-600 dark:text-purple-400">{language.toUpperCase()}</span>
+              <span className="text-sm font-medium text-purple-600 dark:text-purple-400">{i18n.language.toUpperCase()}</span>
             </motion.button>
 
             <a
@@ -169,7 +171,7 @@ const Header = memo(({ language, setLanguage, darkMode, setDarkMode, translation
                              justify-center space-x-2 text-gray-700 dark:text-gray-200"
                   >
                     <Globe size={20} />
-                    <span className="text-sm">{language.toUpperCase()}</span>
+                    <span className="text-sm">{i18n.language.toUpperCase()}</span>
                   </button>
                 </div>
 
