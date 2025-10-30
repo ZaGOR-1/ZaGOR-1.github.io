@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import { SCROLL_THROTTLE_DELAY, HEADER_OFFSET, HOME_HEADER_OFFSET } from '../utils/constants';
 
 const throttle = (func, delay) => {
   let timeoutId;
@@ -35,7 +36,7 @@ export const useScrollProgress = () => {
 
     updateProgress();
 
-    const throttledUpdate = throttle(updateProgress, 100);
+    const throttledUpdate = throttle(updateProgress, SCROLL_THROTTLE_DELAY);
 
     window.addEventListener('scroll', throttledUpdate, { passive: true });
     window.addEventListener('resize', throttledUpdate, { passive: true });
@@ -50,10 +51,10 @@ export const useScrollProgress = () => {
 };
 
 export const useScrollToSection = () => {
-  const scrollToSection = (id) => {
+  const scrollToSection = useCallback((id) => {
     const element = document.getElementById(id);
     if (element) {
-      const offset = id === 'home' ? 0 : 80;
+      const offset = id === 'home' ? HOME_HEADER_OFFSET : HEADER_OFFSET;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - offset;
 
@@ -62,7 +63,7 @@ export const useScrollToSection = () => {
         behavior: 'smooth',
       });
     }
-  };
+  }, []);
 
   return scrollToSection;
 };

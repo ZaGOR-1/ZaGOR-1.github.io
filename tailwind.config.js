@@ -17,6 +17,12 @@ export default {
           dark: '#7c3aed',
         },
       },
+      transitionDuration: {
+        '400': '400ms',
+      },
+      backdropBlur: {
+        xs: '2px',
+      },
       animation: {
         'gradient': 'gradient 8s ease infinite',
         'fade-in': 'fadeIn 0.5s ease-in',

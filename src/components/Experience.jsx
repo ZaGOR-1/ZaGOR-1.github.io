@@ -1,31 +1,15 @@
 import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useMemo } from 'react';
 import { Calendar } from 'lucide-react';
+import { staggerContainerVariants, fadeInVariants } from '../utils/animations';
 
 const Experience = ({ language, translations }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
   const t = translations[language];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        duration: 0.3,
-      },
-    },
-  };
+  const containerVariants = useMemo(() => staggerContainerVariants(), []);
+  const itemVariants = useMemo(() => fadeInVariants, []);
 
   return (
     <section id="experience" className="section-padding bg-gray-50 dark:bg-gray-800/50" ref={ref}>

@@ -1,13 +1,14 @@
 import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useMemo } from 'react';
 import { Heart, Lightbulb, Users, Target } from 'lucide-react';
+import { staggerContainerVariants, fadeInVariants } from '../utils/animations';
 
 const About = ({ language, translations }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
   const t = translations[language];
 
-  const characteristics = [
+  const characteristics = useMemo(() => [
     {
       icon: Heart,
       title: t.about.characteristics.passionate.title,
@@ -28,27 +29,10 @@ const About = ({ language, translations }) => {
       title: t.about.characteristics.dedicated.title,
       description: t.about.characteristics.dedicated.description,
     },
-  ];
+  ], [t]);
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        duration: 0.3,
-      },
-    },
-  };
+  const containerVariants = useMemo(() => staggerContainerVariants(), []);
+  const itemVariants = useMemo(() => fadeInVariants, []);
 
   return (
     <section id="about" className="section-padding bg-gray-50 dark:bg-gray-800/50" ref={ref}>
@@ -80,8 +64,11 @@ const About = ({ language, translations }) => {
             <img
               src="/images/about.jpg"
               alt="About"
+              width="800"
+              height="600"
               className="rounded-2xl shadow-xl w-full"
               loading="lazy"
+              decoding="async"
               onError={(e) => {
                 e.target.src = 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=600&fit=crop';
               }}

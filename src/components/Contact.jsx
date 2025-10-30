@@ -1,6 +1,9 @@
 import { motion, useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useRef, useState, useCallback, useMemo } from 'react';
 import { Mail, MapPin, Phone, Send } from 'lucide-react';
+import { validateFormData } from '../utils/validation';
+import { FORM_SUCCESS_MESSAGE_DURATION, FORM_SUBMIT_DELAY } from '../utils/constants';
+import { staggerContainerVariants, fadeInVariants } from '../utils/animations';
 
 const Contact = ({ language, translations }) => {
   const ref = useRef(null);
@@ -16,25 +19,20 @@ const Contact = ({ language, translations }) => {
   const [formStatus, setFormStatus] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
+  const handleChange = useCallback((e) => {
+    setFormData(prev => ({
+      ...prev,
       [e.target.name]: e.target.value,
-    });
-  };
+    }));
+  }, []);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = useCallback(async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    if (!formData.name || !formData.email || !formData.message) {
-      setFormStatus('error');
-      setIsSubmitting(false);
-      return;
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.email)) {
+    const { isValid } = validateFormData(formData);
+    
+    if (!isValid) {
       setFormStatus('error');
       setIsSubmitting(false);
       return;
@@ -47,11 +45,11 @@ const Contact = ({ language, translations }) => {
       
       setTimeout(() => {
         setFormStatus('');
-      }, 3000);
-    }, 1500);
-  };
+      }, FORM_SUCCESS_MESSAGE_DURATION);
+    }, FORM_SUBMIT_DELAY);
+  }, [formData]);
 
-  const contactInfo = [
+  const contactInfo = useMemo(() => [
     {
       icon: Mail,
       label: t.contact.info.email,
@@ -70,27 +68,10 @@ const Contact = ({ language, translations }) => {
       value: t.contact.info.locationValue,
       link: null,
     },
-  ];
+  ], [t]);
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        duration: 0.3,
-      },
-    },
-  };
+  const containerVariants = useMemo(() => staggerContainerVariants(), []);
+  const itemVariants = useMemo(() => fadeInVariants, []);
 
   return (
     <section id="contact" className="section-padding" ref={ref}>

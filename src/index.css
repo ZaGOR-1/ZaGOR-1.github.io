@@ -29,6 +29,7 @@
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
+  scroll-padding-top: 80px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -64,17 +65,22 @@ body {
 }
 
 .glass-effect {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(229, 231, 235, 0.8);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
   will-change: transform;
   transform: translateZ(0);
   backface-visibility: hidden;
 }
 
 .dark .glass-effect {
-  background: rgba(45, 55, 72, 0.95);
-  border: 1px solid rgba(75, 85, 99, 0.5);
-  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.1);
+  background: rgba(31, 41, 55, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(75, 85, 99, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.18);
 }
 
 .gradient-text {
@@ -128,6 +134,11 @@ body {
 
 .card-hover {
   @apply transition-all duration-200 hover:shadow-lg;
+  will-change: transform, box-shadow;
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
 }
 
 .btn-primary {
