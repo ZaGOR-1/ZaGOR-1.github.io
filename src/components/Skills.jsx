@@ -51,19 +51,28 @@ const Skills = ({ language, translations }) => {
                       </span>
                     </div>
                     
-                    <div className="w-full h-2.5 sm:h-3 bg-gray-200 dark:bg-gray-600 rounded-full overflow-hidden">
+                    <div className="relative w-full h-2.5 sm:h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
                       <motion.div
                         initial={{ width: 0 }}
                         animate={isInView ? { width: `${skill.level}%` } : { width: 0 }}
                         transition={{
-                          duration: 0.8,
+                          duration: 1,
                           delay: categoryIndex * 0.1 + skillIndex * 0.05,
-                          ease: 'easeOut',
+                          ease: [0.43, 0.13, 0.23, 0.96],
                         }}
-                        style={{ willChange: 'width' }}
-                        className="h-full bg-blue-600 
-                                 dark:bg-blue-500 rounded-full"
-                      ></motion.div>
+                        style={{ 
+                          willChange: 'width',
+                          background: 'linear-gradient(90deg, #667eea 0%, #764ba2 100%)',
+                        }}
+                        className="h-full rounded-full relative overflow-hidden"
+                      >
+                        <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent 
+                                       animate-shimmer" 
+                              style={{ 
+                                backgroundSize: '200% 100%',
+                                animation: 'shimmer 2s linear infinite'
+                              }}></span>
+                      </motion.div>
                     </div>
                   </motion.div>
                 ))}

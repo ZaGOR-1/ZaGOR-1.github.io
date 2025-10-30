@@ -45,11 +45,17 @@ const BackToTop = () => {
         <motion.button
           {...buttonVariants}
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 z-50 p-3 rounded-full bg-blue-600 hover:bg-blue-700 
-                     text-white shadow-lg transition-colors duration-200"
+          className="fixed bottom-8 right-8 z-50 p-4 rounded-2xl text-white shadow-2xl overflow-hidden group"
+          style={{
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          }}
+          whileHover={{ scale: 1.1, rotate: 360 }}
+          whileTap={{ scale: 0.9 }}
+          transition={{ type: "spring", stiffness: 260, damping: 20 }}
           aria-label="Back to top"
         >
-          <ArrowUp size={24} />
+          <span className="absolute inset-0 bg-gradient-to-br from-purple-400 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+          <ArrowUp size={24} className="relative z-10" />
         </motion.button>
       )}
     </AnimatePresence>
