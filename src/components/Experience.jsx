@@ -1,13 +1,12 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useMemo } from 'react';
 import { Calendar, Briefcase, TrendingUp, CheckCircle2 } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
 import { staggerContainerVariants, fadeInVariants } from '../utils/animations';
 
-const Experience = () => {
-  const { t } = useTranslation();
+const Experience = ({ language, translations }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const t = translations[language];
 
   const containerVariants = useMemo(() => staggerContainerVariants(), []);
   const itemVariants = useMemo(() => fadeInVariants, []);

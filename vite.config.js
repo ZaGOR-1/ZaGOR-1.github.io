@@ -60,7 +60,7 @@ export default defineConfig({
     exclude: [],
   },
   esbuild: {
-    drop: ['debugger'],
+    drop: ['console', 'debugger'],
     legalComments: 'none',
   },
   server: {

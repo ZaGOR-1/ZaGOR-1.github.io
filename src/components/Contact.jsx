@@ -1,15 +1,14 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState, useCallback, useMemo, memo } from 'react';
 import { Mail, MapPin, Phone, Send } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
 import { validateFormData } from '../utils/validation';
 import { FORM_SUCCESS_MESSAGE_DURATION, FORM_SUBMIT_DELAY } from '../utils/constants';
 import { staggerContainerVariants, fadeInVariants } from '../utils/animations';
 
-const Contact = memo(() => {
-  const { t } = useTranslation();
+const Contact = memo(({ language, translations }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const t = translations[language];
 
   const [formData, setFormData] = useState({
     name: '',

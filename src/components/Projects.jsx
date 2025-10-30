@@ -1,20 +1,19 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState, useMemo, useCallback, memo } from 'react';
 import { ExternalLink, Github, Filter } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
 import { fadeInUpVariants, staggerContainerVariants } from '../utils/animations';
 
-const Projects = memo(() => {
-  const { t, i18n } = useTranslation();
+const Projects = memo(({ language, translations }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const t = translations[language];
   const [activeFilter, setActiveFilter] = useState('all');
 
   const projects = useMemo(() => [
     {
       id: 1,
-      title: i18n.language === 'en' ? 'E-commerce Platform' : 'E-commerce Платформа',
-      description: i18n.language === 'en' 
+      title: language === 'en' ? 'E-commerce Platform' : 'E-commerce Платформа',
+      description: language === 'en' 
         ? 'Full-stack online store with shopping cart, payment integration, and admin dashboard'
         : 'Full-stack онлайн магазин з кошиком, інтеграцією оплати та адмін панеллю',
       image: 'https://images.unsplash.com/photo-1557821552-17105176677c?w=800&h=600&fit=crop',
@@ -25,8 +24,8 @@ const Projects = memo(() => {
     },
     {
       id: 2,
-      title: i18n.language === 'en' ? 'Task Management App' : 'Додаток для Управління Завданнями',
-      description: i18n.language === 'en'
+      title: language === 'en' ? 'Task Management App' : 'Додаток для Управління Завданнями',
+      description: language === 'en'
         ? 'Productivity app with real-time collaboration, drag-and-drop interface, and notifications'
         : 'Додаток продуктивності з співпрацею в реальному часі, drag-and-drop інтерфейсом та сповіщеннями',
       image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=600&fit=crop',
@@ -37,8 +36,8 @@ const Projects = memo(() => {
     },
     {
       id: 3,
-      title: i18n.language === 'en' ? 'Weather Dashboard' : 'Погодний Дашборд',
-      description: i18n.language === 'en'
+      title: language === 'en' ? 'Weather Dashboard' : 'Погодний Дашборд',
+      description: language === 'en'
         ? 'Real-time weather app with 7-day forecast, interactive maps, and location-based alerts'
         : 'Додаток погоди в реальному часі з 7-денним прогнозом, інтерактивними картами та сповіщеннями за локацією',
       image: 'https://images.unsplash.com/photo-1592210454359-9043f067919b?w=800&h=600&fit=crop',
@@ -49,8 +48,8 @@ const Projects = memo(() => {
     },
     {
       id: 4,
-      title: i18n.language === 'en' ? 'RESTful API Service' : 'RESTful API Сервіс',
-      description: i18n.language === 'en'
+      title: language === 'en' ? 'RESTful API Service' : 'RESTful API Сервіс',
+      description: language === 'en'
         ? 'Scalable REST API with authentication, rate limiting, and comprehensive documentation'
         : 'Масштабований REST API з автентифікацією, rate limiting та повною документацією',
       image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&fit=crop',
@@ -61,8 +60,8 @@ const Projects = memo(() => {
     },
     {
       id: 5,
-      title: i18n.language === 'en' ? 'Social Media Dashboard' : 'Дашборд Соціальних Мереж',
-      description: i18n.language === 'en'
+      title: language === 'en' ? 'Social Media Dashboard' : 'Дашборд Соціальних Мереж',
+      description: language === 'en'
         ? 'Analytics dashboard for tracking social media metrics across multiple platforms'
         : 'Аналітичний дашборд для відстеження метрик соціальних мереж на різних платформах',
       image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop',
@@ -73,8 +72,8 @@ const Projects = memo(() => {
     },
     {
       id: 6,
-      title: i18n.language === 'en' ? 'Blog CMS' : 'CMS для Блогу',
-      description: i18n.language === 'en'
+      title: language === 'en' ? 'Blog CMS' : 'CMS для Блогу',
+      description: language === 'en'
         ? 'Content management system with markdown support, SEO optimization, and media library'
         : 'Система управління контентом з підтримкою markdown, SEO оптимізацією та медіа бібліотекою',
       image: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800&h=600&fit=crop',
@@ -83,14 +82,14 @@ const Projects = memo(() => {
       liveUrl: 'https://demo.example.com',
       githubUrl: 'https://github.com',
     },
-  ], [i18n.language]);
+  ], [language]);
 
   const filters = useMemo(() => [
-    { id: 'all', label: i18n.language === 'en' ? 'All' : 'Всі' },
+    { id: 'all', label: language === 'en' ? 'All' : 'Всі' },
     { id: 'frontend', label: 'Frontend' },
     { id: 'backend', label: 'Backend' },
     { id: 'fullstack', label: 'Full Stack' },
-  ], [i18n.language]);
+  ], [language]);
 
   const filteredProjects = useMemo(() => 
     activeFilter === 'all' 

@@ -1,13 +1,12 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useMemo, memo } from 'react';
 import { Heart, Lightbulb, Users, Target } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
 import { staggerContainerVariants, fadeInVariants } from '../utils/animations';
 
-const About = memo(() => {
-  const { t } = useTranslation();
+const About = memo(({ language, translations }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const t = translations[language];
 
   const characteristics = useMemo(() => [
     {

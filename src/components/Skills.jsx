@@ -1,13 +1,12 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useMemo, memo } from 'react';
-import { useTranslation } from 'react-i18next';
 import { skillsData } from '../data/translations';
 import { staggerContainerVariants, fadeInVariants } from '../utils/animations';
 
-const Skills = memo(() => {
-  const { t, i18n } = useTranslation();
+const Skills = memo(({ language, translations }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const t = translations[language];
 
   const containerVariants = useMemo(() => staggerContainerVariants(), []);
   const itemVariants = useMemo(() => fadeInVariants, []);
@@ -87,7 +86,7 @@ const Skills = memo(() => {
           className="mt-12 text-center"
         >
           <p className="text-gray-600 dark:text-gray-300 text-lg">
-            {i18n.language === 'en' 
+            {language === 'en' 
               ? 'Always learning and improving my skills!' 
               : 'Завжди навчаюсь та покращую свої навички!'}
           </p>

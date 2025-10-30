@@ -1,13 +1,12 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useMemo } from 'react';
 import { GraduationCap, Award, BookOpen } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
 import { staggerContainerVariants, fadeInVariants } from '../utils/animations';
 
-const Education = () => {
-  const { t } = useTranslation();
+const Education = ({ language, translations }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const t = translations[language];
 
   const containerVariants = useMemo(() => staggerContainerVariants(), []);
   const itemVariants = useMemo(() => fadeInVariants, []);

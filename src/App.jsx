@@ -1,11 +1,11 @@
-import { useEffect, lazy, Suspense, useMemo } from 'react';
+import { useEffect, lazy, Suspense, useMemo, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { useTranslation } from 'react-i18next';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import BackToTop from './components/BackToTop';
 import LoadingSpinner from './components/LoadingSpinner';
 import AnimatedBackground from './components/AnimatedBackground';
+import { translations } from './data/translations';
 import { useScrollProgress } from './hooks/useScrollProgress';
 import { useLocalStorage } from './hooks/useLocalStorage';
 
@@ -18,7 +18,7 @@ const Contact = lazy(() => import('./components/Contact'));
 const Footer = lazy(() => import('./components/Footer'));
 
 function App() {
-  const { i18n } = useTranslation();
+  const [language, setLanguage] = useLocalStorage('language', 'en');
   const [darkMode, setDarkMode] = useLocalStorage('darkMode', true);
   const scrollProgress = useScrollProgress();
 
@@ -35,6 +35,14 @@ function App() {
     `scaleX(${scrollProgress / 100})`,
     [scrollProgress]
   );
+
+  const handleSetLanguage = useCallback((newLanguage) => {
+    setLanguage(newLanguage);
+  }, [setLanguage]);
+
+  const handleSetDarkMode = useCallback((newDarkMode) => {
+    setDarkMode(newDarkMode);
+  }, [setDarkMode]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 
@@ -55,20 +63,23 @@ function App() {
       />
 
       <Header
+        language={language}
+        setLanguage={handleSetLanguage}
         darkMode={darkMode}
-        setDarkMode={setDarkMode}
+        setDarkMode={handleSetDarkMode}
+        translations={translations}
       />
 
       <main id="main" className="relative z-10">
-        <Hero />
+        <Hero language={language} translations={translations} />
         <Suspense fallback={<LoadingSpinner />}>
-          <About />
-          <Skills />
-          <Education />
-          <Experience />
-          <Projects />
-          <Contact />
-          <Footer />
+          <About language={language} translations={translations} />
+          <Skills language={language} translations={translations} />
+          <Education language={language} translations={translations} />
+          <Experience language={language} translations={translations} />
+          <Projects language={language} translations={translations} />
+          <Contact language={language} translations={translations} />
+          <Footer language={language} translations={translations} />
         </Suspense>
       </main>
 
