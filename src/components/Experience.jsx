@@ -220,7 +220,7 @@ const Experience = ({ language, translations }) => {
                       <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
                         <motion.div 
                           initial={{ width: 0 }}
-                          animate={isInView ? { width: `${Math.min((duration / 12) * 100, 100)}%` } : { width: 0 }}
+                          animate={isInView ? { width: isCompleted ? '100%' : `${Math.min((duration / 12) * 100, 100)}%` } : { width: 0 }}
                           transition={{ delay: 0.5 + index * 0.2, duration: 1, ease: "easeOut" }}
                           className="h-full bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 
                                    rounded-full relative overflow-hidden"
@@ -234,7 +234,7 @@ const Experience = ({ language, translations }) => {
                       </div>
                       <div className="flex justify-between mt-1 text-xs text-gray-500 dark:text-gray-400">
                         <span>{language === 'uk' ? 'Початок' : 'Start'}</span>
-                        <span>{language === 'uk' ? `${duration} міс.` : `${duration} mos.`}</span>
+                        <span>{isCompleted ? (language === 'uk' ? 'Завершено' : 'Completed') : (language === 'uk' ? `${duration} міс.` : `${duration} mos.`)}</span>
                       </div>
                     </div>
 
